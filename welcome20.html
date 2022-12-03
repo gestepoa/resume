@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Use correct character set. -->
+  <meta charset="utf-8" />
+  <!-- Tell IE to use the latest, best version. -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Make the application on mobile take up the full browser screen and disable user scaling. -->
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+  <title>welcome_20_v1.0</title>
+  <script src="../Build/Cesium/Cesium.js"></script>
+  <script src="./ruhua.js"></script>
+  <script src="../node_modules/cesium-navigation-es6/dist/CesiumNavigation.umd.js"></script>
+  <script src="./echarts.js"></script>
+  <link rel="stylesheet" type="text/css" href="./welcome20.css">
+</head>
+
+<body>
+  <div id="cesiumContainer">
+    <dl class="checkBox">
+      <div class="show">
+        <img class="showexpand" src="./icon/iconexpand.png" onclick="showdl()"></img>
+      </div>
+      <div class="dtcondition">
+        <img class="dtclose" src="./icon/iconclose.png"></img>
+      </div>
+      <div class="ddcondition">
+        <div id="condition">condition</div>
+        <p><input id="p1" type="checkbox" name="item" value="栗战书" onclick="test1(this)"><label for="p1">栗战书</label></p>
+        <p><input id="p2" type="checkbox" name="item" value="王沪宁" onclick="test1(this)"><label for="p2">王沪宁</label></p>
+        <p><input id="p3" type="checkbox" name="item" value="胡春华" onclick="test1(this)"><label for="p3">胡春华</label></p>
+        <p><input id="p4" type="checkbox" name="item" value="骆惠宁" onclick="test1(this)"><label for="p4">骆惠宁</label></p>
+        <p><input id="p5" type="checkbox" name="item" value="李强" onclick="test1(this)"><label for="p5">李强</label></p>
+        <p><input id="p6" type="checkbox" name="item" value="陈敏尔" onclick="test1(this)"><label for="p6">陈敏尔</label></p>
+        <p><input id="p7" type="checkbox" name="item" value="丁薛祥" onclick="test1(this)"><label for="p7">丁薛祥</label></p>
+        <p><input id="p8" type="checkbox" name="item" value="蔡奇" onclick="test1(this)"><label for="p8">蔡奇</label></p>
+        <p><input id="p9" type="checkbox" name="item" value="李希" onclick="test1(this)"><label for="p9">李希</label></p>
+        <p><input id="p10" type="checkbox" name="item" value="楼阳生" onclick="test1(this)"><label for="p10">楼阳生</label></p>
+        <p><input id="p11" type="checkbox" name="item" value="赵乐际" onclick="test1(this)"><label for="p11">赵乐际</label></p>
+        <p><input id="p12" type="checkbox" name="item" value="习近平" onclick="test1(this)"><label for="p12">习近平</label></p>
+      </div>
+      <div class="legend">
+        <div class="part1">
+          <div class="part1color"></div>
+          <div class="part1word">党务工作</div>
+        </div>
+        <div class="part2">
+          <div class="part2color"></div>
+          <div class="part2word">政府公职</div>
+        </div>
+        <div class="part3">
+          <div class="part3color"></div>
+          <div class="part3word">军委/军队/军校/军工</div>
+        </div>
+        <div class="part4">
+          <div class="part4color"></div>
+          <div class="part4word">共青团工作经历</div>
+        </div>
+        <div class="part5">
+          <div class="part5color"></div>
+          <div class="part5word">高校任教/管理/党委/团委</div>
+        </div>
+      </div>
+    </dl>
+    <div class="chart">
+      <div class="paperwall"></div>
+      <div class="echarts1" id="Nightingale"></div>
+      <img class="iconcancel" src="./icon/iconoff.png" onclick="hidechart()"></img>
+    </div>
+    <div class="charthide">
+      <img class="iconchart" src="./icon/iconchart2.png" onclick="showchart()"></img>
+    </div>
+    <div class="search_box">
+      <img src="./icon/search.png"></img>
+      <input class="tbox" type="text" name="" value="" placeholder="enter name" onkeypress="actionOnEnter(event)">
+      <button class="btn" type="button" name="button" onclick="inputSearch()">subscribe</button>
+    </div>
+    <div class="borderbtn">
+      <img src="./icon/iconborder.png" onclick="provinceBorder()"></img>
+    </div>
+  </div>
+  <script>
+
+    // -----------------------------------------------------------------------map service-----------------------------------------------------------------------------
+
+    // imageryProvider
+    var imageryViewModels = [];
+
+    Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI0NDIwMmYzOS0zZDVmLTQ5MzItYmRiOS1mNGJkMjI3YTM3YTMiLCJpZCI6ODE4NTcsImlhdCI6MTY0NDM3Mjk2OX0.dWRrBMhBlTANfzKoGpsiReMdTbnfQRRwoR4y6A0YYHM";
+
+    var tiandituyx = new Cesium.ProviderViewModel({
+      name: "天地图综合",
+      tooltip: "影像和中文注记",
+      iconUrl: "./icontianditu.png",
+      creationFunction: function () {
+        var mapsources = [];
+        var yx = new Cesium.WebMapTileServiceImageryProvider({
+          url: "http://t0.tianditu.com/img_w/wmts?service=wmts&request=GetTile&version=1.0.0&LAYER=img&tileMatrixSet=w&TileMatrix={TileMatrix}&TileRow={TileRow}&TileCol={TileCol}&style=default&format=tiles&tk=44a7489d8807d060c3eb5cd785e8ba59",
+          maximumLevel: 18,
+          show: true
+        })
+        var jd = new Cesium.WebMapTileServiceImageryProvider({
+          url: "http://t0.tianditu.gov.cn/cia_w/wmts?service=wmts&request=GetTile&version=1.0.0&LAYER=cia&tileMatrixSet=w&TileMatrix={TileMatrix}&TileRow={TileRow}&TileCol={TileCol}&style=default&format=tiles&tk=44a7489d8807d060c3eb5cd785e8ba59",
+          maximumLevel: 18,
+          show: true
+        })
+        mapsources.push(yx, jd);
+        return mapsources;
+      }
+    });
+    imageryViewModels.push(tiandituyx)
+
+    var tiandituprojection = new Cesium.ProviderViewModel({
+      name: "天地图影像",
+      tooltip: "投影测试",
+      iconUrl: "./icon/icontianditu.png",
+      creationFunction: function () {
+        return new Cesium.WebMapTileServiceImageryProvider({
+          url: "http://{s}.tianditu.gov.cn/img_w/wmts?service=wmts&request=GetTile&version=1.0.0" +
+            "&LAYER=img&tileMatrixSet=w&TileMatrix={TileMatrix}&TileRow={TileRow}&TileCol={TileCol}" +
+            "&style=default&format=tiles&tk=44a7489d8807d060c3eb5cd785e8ba59",
+          // url: "http://{s}.tianditu.gov.cn/img_c/wmts?service=wmts&request=GetTile&version=1.0.0" +
+          //      "&LAYER=img&tileMatrixSet=c&TileMatrix={TileMatrix}&TileRow={TileRow}&TileCol={TileCol}" +
+          //      "&style=default&format=tiles&tk=44a7489d8807d060c3eb5cd785e8ba59",
+          layer: "img",
+          style: "default",
+          format: "tiles",
+          tileMatrixSetID: "w",
+          subdomains: ["t0", "t1", "t2", "t3", "t4", "t5", "t6", "t7"],
+          tileMatrixLabels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18"],
+          // tilingScheme: new Cesium.GeographicTilingScheme(),
+          tilingScheme: new Cesium.WebMercatorTilingScheme({
+            ellipsoid: Cesium.Ellipsoid.WGS84,
+            numberOfLevelZeroTilesX: 2,
+            numberOfLevelZeroTilesY: 2
+          }),
+          maximumLevel: 18,
+          show: true
+        })
+      }
+    })
+    imageryViewModels.push(tiandituprojection)
+
+    var gaodesl = new Cesium.ProviderViewModel({
+      name: "高德矢量地图",
+      tooltip: "矢量地图",
+      iconUrl: "./icon/icongaode.png",
+      creationFunction: function () {
+        return new Cesium.UrlTemplateImageryProvider({
+          url: "http://webrd02.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}",
+          minimumLevel: 3,
+          maximumLevel: 18
+        })
+      }
+    })
+    imageryViewModels.push(gaodesl)
+
+    var gaodeyx = new Cesium.ProviderViewModel({
+      name: "高德影像地图",
+      tooltip: "影像地图",
+      iconUrl: "./icon/icongaode.png",
+      creationFunction: function () {
+        return new Cesium.UrlTemplateImageryProvider({
+          url: "https://webst02.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}",
+          minimumLevel: 3,
+          maximumLevel: 16
+        })
+      }
+    })
+    imageryViewModels.push(gaodeyx)
+
+    var gaodezj = new Cesium.ProviderViewModel({
+      name: "高德中文注记",
+      tooltip: "中文注记",
+      iconUrl: "./icon/icongaode.png",
+      creationFunction: function () {
+        return new Cesium.UrlTemplateImageryProvider({
+          url: "http://webst02.is.autonavi.com/appmaptile?x={x}&y={y}&z={z}&lang=zh_cn&size=1&scale=1&style=8",
+          minimumLevel: 3,
+          maximumLevel: 18
+        })
+      }
+    })
+    imageryViewModels.push(gaodezj)
+
+    // create earth
+    var viewer = new Cesium.Viewer("cesiumContainer", {
+      baseLayerPicker: true,
+      // imageryProviderViewModels: imageryViewModels,
+      // selectedImageryProviderViewModel: tiandituyx,
+      geocoder: false,
+      homeButton: false,
+      sceneModePicker: false,
+      navigationHelpButton: false,
+      animation: false,
+      timeline: false,
+      fullscreenButton: false,
+      vrButton: false,
+      // terrainProvider : Cesium.createWorldTerrain({
+      //   requestWaterMask: true,
+      //   requestVertexNormals: true
+      // })
+    });
+
+    viewer._cesiumWidget._creditContainer.style.display = "none";
+
+    // add navigation
+    const options = {};
+    options.defaultResetView = Cesium.Rectangle.fromDegrees(80, 22, 130, 50);
+    options.enableCompass = true;
+    options.enableZoomControls = true;
+    options.enableDistanceLegend = true;
+    options.enableCompassOuterRing = true;
+
+    options.resetTooltip = "重置视图";
+    options.zoomInTooltip = "放大";
+    options.zoomOutTooltip = "缩小";
+
+    new CesiumNavigation(viewer, options);
+
+    // ----------------------------------------------------------------------dictionary-------------------------------------------------------------------------------
+    class Dictionary {
+      constructor() {
+        this.dataStore = {}
+      }
+
+      add(key, value) {
+        this.dataStore[key] = value
+      }
+
+      update(key, value) {
+        this.remove(key)
+        this.dataStore[key] = value
+      }
+
+      find(key) {
+        return this.dataStore[key]
+      }
+
+      remove(key) {
+        delete this.dataStore[key]
+      }
+
+      getKeys() {
+        return Object.keys(this.dataStore)
+      }
+
+      getKeysSort() {
+        return this.getKeys().sort()
+      }
+
+      count() {
+        return this.getKeys().length
+      }
+
+      showAll() {
+        let res = ''
+        this.getKeys().forEach(key => {
+          res += `,{key:'${key}',value:'${this.dataStore[key]}'}`
+        })
+        return res.slice(1)
+      }
+
+      showAllSort() {
+        let res = ''
+        this.getKeys().sort().forEach(key => {
+          res += `,{key:'${key}',value:'${this.dataStore[key]}'}`
+        })
+        return res.slice(1)
+      }
+
+      clear() {
+        this.getKeys().forEach(key => {
+          delete this.dataStore[key]
+        })
+        this.dataStore = {}
+      }
+    }
+
+    // store primitive object
+    var primitivesManagement = new Dictionary();
+    // store img name
+    var dict1 = new Dictionary();
+    dict1.add("党", "party");
+    dict1.add("政", "gov");
+    dict1.add("军", "mil");
+    dict1.add("团", "youth");
+    dict1.add("学", "university");
+    dict1.add("党政", "party_gov");
+    dict1.add("党军", "party_mil");
+    dict1.add("党团", "party_youth");
+    dict1.add("政团", "gov_youth");
+    dict1.add("政军", "gov_mil");
+    dict1.add("党学", "party_university");
+    dict1.add("政学", "gov_university");
+    dict1.add("军学", "mil_university");
+    dict1.add("党政军", "party_gov_mil");
+    dict1.add("党军团", "party_mil_youth");
+    dict1.add("政军团", "gov_mil_youth");
+    dict1.add("党政团", "party_gov_youth");
+    dict1.add("党政学", "party_gov_university");
+    dict1.add("党军学", "party_mil_university");
+    dict1.add("政军学", "gov_mil_university");
+    dict1.add("党政军团", "party_gov_mil_youth");
+    dict1.add("党政军学", "party_gov_mil_university");
+
+    // ---------------------------------------------------------------------------chart------------------------------------------------------------------------
+    // key-value mode object
+    function countArr(arr) {
+      let hashArr = [...new Set(arr)];
+      let list = [];
+      hashArr.forEach((element) => {
+        list.push(arr.filter(i => i == element));
+      });
+      let newArr = []
+      hashArr.forEach((item, index) => {
+        newArr.push({
+          value: list[index].length,
+          name: item
+        })
+      })
+      return newArr;
+    }
+    // rank function
+    function sortValue(a, b) {
+      return b.value - a.value;
+    }
+    
+    function getChartProvince(totalresume) {
+      let a = []
+      for (let i = 0; i <= totalresume.length - 1; i++) {
+        let b = totalresume[i].province
+        a.push(b)
+      }
+      let c = countArr(a)
+      return(c.sort(sortValue))
+    }
+
+    function drawChart(){
+      let myChart = echarts.init(document.getElementById('Nightingale'))
+      let option = {
+        title: {
+          text: 'Total Officials ',
+          subtext: 'Data Upgrading',
+          left: 'center'
+        },
+        tooltip: {
+          trigger: 'item',
+          formatter: '{a} <br/>{b} : {c} ({d}%)'
+        },
+        toolbox: {
+          show: true,
+          feature: {
+            mark: { show: false },
+            dataView: { show: true, readOnly: false },
+            restore: { show: true },
+            saveAsImage: { show: true }
+          }
+        },
+        series: [{
+          name: 'Radius Mode',
+          type: 'pie',
+          radius: [20, 140],
+          center: ['50%', '50%'],
+          roseType: 'radius',
+          itemStyle: {borderRadius: 5},
+          label: {show: false},
+          emphasis: {label: {show: true}},
+          data: getChartProvince(totalresume)
+        }]
+      };
+      myChart.setOption(option);
+    }
+
+    // ---------------------------------------------------------------------------interaction-------------------------------------------------------------------------
+
+    window.onload = function () {
+      let oA = document.querySelector('.dtclose')
+      oA.onclick = function () {
+        let show_show = document.querySelector('.show')
+        let show_dtcondition = document.querySelector('.dtcondition')
+        let show_ddcondition = document.querySelector('.ddcondition')
+        let show_legend = document.querySelector('.legend')
+        show_show.style.display = 'block'
+        show_dtcondition.style.display = 'none'
+        show_ddcondition.style.display = 'none'
+        show_legend.style.display = 'none'
+      }
+    }
+    // hide ddcondition
+    function showdl() {
+      let show_show = document.querySelector('.show')
+      let show_dtcondition = this.document.querySelector('.dtcondition')
+      let show_ddcondition = this.document.querySelector('.ddcondition')
+      let show_legend = document.querySelector('.legend')
+      show_show.style.display = 'none'
+      show_dtcondition.style.display = 'block'
+      show_ddcondition.style.display = 'block'
+      show_legend.style.display = 'block'
+    }
+    // sub-function of inputSearch()
+    function checkList(name) {
+      let obj = document.getElementsByName('item')
+      for (let i = 0; i <= obj.length - 1; i++) {
+        if (obj[i].value == name) {
+          if (obj[i].checked) {
+            return "target exist"
+            break
+          } else {
+            obj[i].checked = true
+            document.getElementById(obj[i].id).disabled = "true"
+            return obj[i].id
+            break
+          }
+        }
+      }
+    }
+    // search box function 
+    function inputSearch() {
+      let result = document.querySelector(".tbox")
+      let text = result.value
+      let checkListResult = checkList(text)
+      if (checkListResult == 'target exist') {
+        alert('target exist')
+      } else {
+        let personResume = totalresume.filter(item => item.target === text)
+        if (personResume.length == 0) {
+          alert("no result")
+        } else {
+          let ox = randomHexColor()
+          drawPolyLine2(text, ox).then(() => {
+            setTimeout(() => {
+              document.getElementById("condition").innerHTML = "ended"
+              document.getElementById(checkListResult).disabled = ""
+            }, 2000)
+          })
+        }
+      }
+    }
+    // press enter on keyboard to trigger inputSearch()
+    function actionOnEnter(evt) {
+      evt = evt ? evt : event
+      let charCode = (evt.charCode) ? evt.charCode : ((evt.which) ? evt.which : evt.keyCode)
+      if (charCode == 13 || charCode == 3) {
+        inputSearch()
+      }
+    }
+
+    function hidechart() {
+      let node1 = document.querySelector('.chart')
+      let node2 = document.querySelector('.charthide')
+      node1.style.display = 'none'
+      node2.style.display = 'block'
+    }
+
+    function showchart() {
+      let node1 = document.querySelector('.chart')
+      let node2 = document.querySelector('.charthide')
+      node1.style.display = 'block'
+      node2.style.display = 'none'
+      drawChart()
+    }
+
+    // sub-function of provinceBorder()
+    function createBorder() {
+      const result = Cesium.GeoJsonDataSource.load('./geo_china_new.json', {
+        stroke: Cesium.Color.HOTYELLOW,
+        fill: Cesium.Color.YELLOW.withAlpha(0.1),
+        strokeWidth: 5,
+        markerSymbol: '?'
+      })
+      return result
+    }
+    // create geographic information from loaded geojson file
+    async function provinceBorder() {
+      if (this.viewer.dataSources.getByName("PBCHN")[0]) {
+        alert("province border exist")
+      } else {
+        let condition = await createBorder().then((result) => {
+          result.name = "PBCHN";
+          viewer.dataSources.add(result)
+          return "resource loaded"
+        })
+        alert(condition)
+      }
+    }
+
+    // select-all checkbox trigger function
+    function test() {
+      let obj = document.getElementsByName('item');
+      for (let i = 0; i < obj.length; i++) {
+        if (obj[i].checked) {
+          if (primitivesManagement.find(obj[i].value)) {
+            removeEntity(obj[i].value)
+          }
+          let ox = randomHexColor()
+          drawAll(obj[i].value, ox)
+        } else {
+          removeEntity(obj[i].value)
+        }
+      }
+    }
+    // select single checkbox trigger function
+    function test1(target) {
+      if (target.checked) {
+        document.getElementById(target.id).disabled = "true"
+        console.log(target.value)
+        // let ox = "#FFFF00"
+        let ox = randomHexColor()
+        drawPolyLine2(target.value, ox).then(() => {
+          setTimeout(() => {
+            document.getElementById("condition").innerHTML = "ended"
+            document.getElementById(target.id).disabled = ""
+          }, 2000)
+        })
+      } else {
+        removeEntity(target.value)
+      }
+    }
+
+    // random color code in OX, sub-function of test1()/test()/inputSearch()
+    function randomHexColor() {
+      let hex = Math.floor(Math.random() * 16777216).toString(16);
+      while (hex.length < 6) {
+        hex = '0' + hex;
+      }
+      return '#' + hex;
+    }
+
+    // disabling browser right-click function
+    function doProhibit() {
+      if (window.Event) {
+        document.captureEvents(Event.MOUSEUP);
+      }
+      function nocontextmenu() {
+        event.cancelBubble = true
+        event.returnvalue = false;
+        return false;
+      }
+      function norightclick(e) {
+        if (window.Event) {
+          if (e.which == 2 || e.which == 3)
+            return false;
+        } else if (event.button == 2 || event.button == 3) {
+          event.cancelBubble = true
+          event.returnvalue = false;
+          return false;
+        }
+      }
+      document.oncontextmenu = nocontextmenu;
+      document.onmousedown = norightclick;
+    }
+    doProhibit()
+
+    // right-click define
+    loadRightClick()
+    function loadRightClick() {
+      let Handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas)
+      Handler.setInputAction(function (e) {
+        let pickedObject = viewer.scene.pick(e.position)
+        if (pickedObject != undefined) {
+          let entitiesId = pickedObject.id._id
+          let entity = viewer.entities.getById(entitiesId)
+          if (entity != undefined) {
+            let type = ""
+            if (entity.billboard != undefined) {
+              type = "billboard"
+            }
+            if (entity.polygon != undefined) {
+              type = "polygon"
+            }
+            if (entity.polyline != undefined) {
+              type = "polyline"
+            }
+            loadUl(e.position, entity._contextmenuItems, type, entitiesId)
+          }
+        }
+      }, Cesium.ScreenSpaceEventType.RIGHT_CLICK)
+    }
+
+    function loadUl(pos, textArr, type, entitiesId) {
+      let con, lis = ''
+      if (textArr != undefined && type != undefined) {
+        for (let i = 0; i < textArr.length; i++) {
+          lis += `<li class="li-item" data-index="20">
+                  <a href="javascript:rightliClick( '${textArr[i].type}', '${entitiesId}' )" >${textArr[i].text}</a>
+                  </li>`
+        }
+        lis += `<li class="li-item" data-index="20">
+                <a href="javascript:rightliClick( 'cancel' )" >cancel</a>
+                </li>`
+      }
+      con = `<ul class="contextmenu-ul">${lis}</ul>`
+      let divs = document.querySelectorAll(".contextmenu")
+      if (divs.length != 0) {
+        cesiumContainer.removeChild(divs[0])
+      }
+      div = document.createElement('div')
+      div.className = "contextmenu"
+      div.style.top = pos.y + 'px'
+      div.style.left = pos.x + 'px'
+      div.style.position = 'fixed'
+      div.innerHTML = con
+      cesiumContainer.append(div)
+    }
+
+    function rightliClick(type, entitiesId) {
+      let divs = document.querySelectorAll(".contextmenu")
+      cesiumContainer.removeChild(divs[0]);
+      switch (type) {
+        case 'cancel':
+          break
+        case 'cesiumObj':
+          let entity = viewer.entities.getById(entitiesId);
+          if (entity != undefined) {
+            let target = entitiesId.replace(/\d+./g, '')
+            let removeResult = removeEntity(target)
+            if(removeResult == 1) {
+              let obj = document.getElementsByName('item');
+              for (i = 0; i < obj.length; i++) {
+                obj[i].checked = false
+              }
+            }
+          }
+          break
+      }
+    }
+
+    // left click define
+    loadLeftClick();
+    function loadLeftClick() {
+      let Handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
+      Handler.setInputAction(function (e) {
+        let pickedObject = viewer.scene.pick(e.position);
+        if (pickedObject != undefined) {
+          console.log("this is entity")
+        } else {
+          console.log("this is blank")
+        }
+        let rightClickCheck = document.querySelector('.contextmenu-ul')
+        if (rightClickCheck) {
+          rightClickCheck.parentNode.removeChild(rightClickCheck)
+        }
+      }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
+    };
+
+    // mousemove define
+    loadMouseMove()
+    function loadMouseMove() {
+      let previousPickedEntity = undefined;
+      let handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
+      handler.setInputAction(function (movement) {
+        let pickedPrimitive = viewer.scene.pick(movement.endPosition);
+        let pickedEntity = (Cesium.defined(pickedPrimitive)) ? pickedPrimitive.id : undefined;
+        console.log(pickedEntity)
+        if (Cesium.defined(previousPickedEntity)) {
+          previousPickedEntity.billboard.scale = 0.2;
+        }
+        if (Cesium.defined(pickedEntity) && Cesium.defined(pickedEntity.billboard)) {
+          pickedEntity.billboard.scale = 0.5;
+          previousPickedEntity = pickedEntity;
+        }
+      }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+    }
+
+    // --------------------------------------------------------------------------geographic information-------------------------------------------------------------------
+
+    // sub-function of drawAll(),draw polyline with different type
+    function singleLine(target, id_plus, line, ox) {
+      viewer.entities.add({
+        id: target + id_plus + "L",
+        polyline: {
+          positions: Cesium.Cartesian3.fromDegreesArrayHeights(line),
+          width: 25,
+          // 箭头
+          material: new Cesium.PolylineArrowMaterialProperty(
+            Cesium.Color.fromCssColorString(ox)
+          ),
+          // 外边线
+          // material: new Cesium.PolylineOutlineMaterialProperty({
+          //   color: Cesium.Color.fromCssColorString(ox),
+          //   outlineWidth: 2,
+          //   outlineColor: Cesium.Color.BLACK,
+          // }),
+          // 荧光
+          // material: new Cesium.PolylineGlowMaterialProperty({
+          //   color: Cesium.Color.fromCssColorString(ox),
+          //   glowPower: 0.1
+          // })
+          // 普通
+          // material: Cesium.Color.fromCssColorString(ox)
+        },
+      });
+    }
+
+    // draw all target
+    function drawAll(target, ox) {
+      let totalLinePoint = []
+      let personResume = totalresume.filter(item => item.target === target)
+      for (let i = 0; i <= personResume.length - 1; i++) {
+        f1(personResume[i], ox, i + 1)
+        if (i > 0) {
+          let id_plus = personResume[i].time
+          let line = [personResume[i - 1].position[0], personResume[i - 1].position[1], personResume[i - 1].position[2], personResume[i].position[0], personResume[i].position[1], personResume[i].position[2]]
+          singleLine(target, id_plus, line, ox)
+        }
+      }
+    }
+
+    function getDomains(domains) {
+      let valueList = dict1.getKeys()
+      for (let i = 0; i <= valueList.length - 1; i++) {
+        if (valueList[i] == domains) {
+          let domainsEng = dict1.find(valueList[i])
+          return domainsEng
+          break
+        } else if (valueList[i].length == domains.length) {
+          let r = 0
+          for (let j = 0; j <= domains.length - 1; j++) {
+            if (valueList[i].indexOf(domains[j]) == -1) {
+              r = -1
+              break
+            }
+          }
+          if (r != -1) {
+            let domainsEng = dict1.find(valueList[i])
+            return domainsEng
+          }
+        }
+      }
+    }
+
+    function fadePolyline(polylines, line, ox) {
+      polylines.add({
+        positions: Cesium.Cartesian3.fromDegreesArrayHeights(line),
+        width: 10,
+        material: Cesium.Material.fromType(Cesium.Material.FadeType, {
+          repeat: false,
+          fadeInColor: Cesium.Color.fromCssColorString(ox).withAlpha(0.2),
+          fadeOutColor: Cesium.Color.fromCssColorString(ox),
+          // maximumDistance: 0.5,
+          time: new Cesium.Cartesian2(0.0, 0.0),
+          fadeDirection: {
+            x: true,
+            y: false
+          }
+        })
+      })
+    }
+    // f0 for line
+    function f0(target, id_plus, line, ox) {
+      polylinesName = target + id_plus + "L"
+      console.log(polylinesName)
+      if (primitivesManagement.find(target)) {
+        polylines = primitivesManagement.find(target)
+        fadePolyline(polylines, line, ox)
+        primitivesManagement.update(target, polylines);
+      } else {
+        let polylines = viewer.scene.primitives.add(new Cesium.PolylineCollection())
+        fadePolyline(polylines, line, ox)
+        primitivesManagement.add(target, polylines)
+      }
+    }
+    // f1 for point
+    function f1(personResume, ox, order) {
+      let cityPosition = Cesium.Cartesian3.fromDegrees(personResume.position[0], personResume.position[1], personResume.position[2]);
+      let name = personResume.local;
+      let img = "./icon/" + getDomains(personResume.domains) + ".png"
+      let coorDes = '<table class="cesium-infoBox-defaultTable cesium-infoBox-defaultTable-lighter"><tbody>' +
+        '<tr><th>' + "姓名" + '</th><td>' + personResume.target + '</td></tr>' +
+        '<tr><th>' + "省份" + '</th><td>' + personResume.province + '</td></tr>' +
+        '<tr><th>' + "地区" + '</th><td>' + personResume.local + '</td></tr>' +
+        '<tr><th>' + "主要官职" + '</th><td>' + personResume.govpos + '</td></tr>' +
+        '<tr><th>' + "起始年份" + '</th><td>' + personResume.time + '</td></tr>' +
+        '<tr><th>' + "持续时间" + '</th><td>' + personResume.duration + '</td></tr>' +
+        '</tbody></table>';
+      let lab = {
+        text: personResume.local + order,
+        color: Cesium.Color.fromCssColorString('#fff'),
+        font: 'normal 32px MicroSoft YaHei',
+        showBackground: true,
+        scale: 0.5,
+        pixelOffset: new Cesium.Cartesian2(0, -40),
+        horizontalOrigin: Cesium.HorizontalOrigin.LEFT_CLICK,
+        verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+        disableDepthTestDistance: 5001617
+      };
+      let k = [{
+        text: "delete all",
+        type: "cesiumObj",
+        calback: function (e) {
+          let k = e.target;
+          k && viewer.entities.remove(k)
+        }
+      }];
+      viewer.entities.add({
+        id: personResume.target + personResume.time,
+        target: personResume.target,
+        name: name,
+        position: cityPosition,
+        billboard: {
+          image: img,
+          horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
+          verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+          scale: 0.2
+        },
+        description: coorDes,
+        label: lab,
+        contextmenuItems: k
+      });
+    }
+
+    function f2(delay, personResume, ox, order) {
+      return new Promise(function (resolve, reject) {
+        setTimeout(function () {
+          f1(personResume, ox, order);
+          resolve();
+        }, delay);
+      });
+    }
+
+    function f3(delay, target, id_plus, line, ox) {
+      return new Promise(function (resolve, reject) {
+        setTimeout(function () {
+          f0(target, id_plus, line, ox);
+          resolve();
+        }, delay);
+      });
+    }
+
+    function gradientColor(startColor, endColor, step) {
+      startRGB = this.colorRgb(startColor);//转换为rgb数组模式
+      startR = startRGB[0];
+      startG = startRGB[1];
+      startB = startRGB[2];
+
+      endRGB = this.colorRgb(endColor);
+      endR = endRGB[0];
+      endG = endRGB[1];
+      endB = endRGB[2];
+
+      sR = (endR - startR) / step;//总差值
+      sG = (endG - startG) / step;
+      sB = (endB - startB) / step;
+
+      let colorArr = [];
+      for (let i = 0; i < step; i++) {
+        let hex = this.colorHex(parseInt((sR * i + startR)) + ',' + parseInt((sG * i + startG)) + ',' + parseInt((sB * i + startB)));
+        colorArr.push(hex);
+      }
+      return colorArr;
+    }
+
+    gradientColor.prototype.colorRgb = function (oxcode) {
+      let reg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/;
+      let ox = oxcode.toLowerCase();
+      if (ox && reg.test(ox)) {
+        if (ox.length === 4) {
+          let oxNew = "#";
+          for (let i = 1; i < 4; i += 1) {
+            oxNew += ox.slice(i, i + 1).concat(ox.slice(i, i + 1));
+          }
+          ox = oxNew;
+        }
+        let oxChange = [];
+        for (let i = 1; i < 7; i += 2) {
+          oxChange.push(parseInt("0x" + ox.slice(i, i + 2)));
+        }
+        return oxChange;
+      } else {
+        return ox;
+      }
+    }
+
+    gradientColor.prototype.colorHex = function (rgb) {
+      console.log(rgb)
+      let aColor = rgb.split(",");
+      console.log(aColor)
+      let strHex = "#";
+      for (let i = 0; i < aColor.length; i++) {
+        let hex = Number(aColor[i]).toString(16);
+        hex = hex.length < 2 ? 0 + '' + hex : hex;
+        if (hex === "0") {
+          hex += hex;
+        }
+        strHex += hex;
+      }
+      return strHex
+    }
+
+    function preProcessing(personResume) {
+      let localList = []
+      personResume.forEach(element => {
+        let localSingle = element.local
+        localList.push(localSingle)
+      });
+
+      let localGroup = localList.reduce(function (obj, name) {
+        obj[name] = obj[name] ? ++obj[name] : 1;
+        return obj;
+      }, {})
+
+      let localListDistinct = Object.keys(localGroup)
+      let localDuplicate = []
+      localListDistinct.forEach(element => {
+        if (localGroup[element] > 1) {
+          localDuplicate.push(element)
+        }
+      })
+
+      personResume.forEach(element => {
+        if (localDuplicate.indexOf(element.local) != -1) {
+          let randomNumber = getRandomIntSection(-0.06, 0.06)
+          element.position[0] += randomNumber
+          element.position[1] += randomNumber
+        }
+      });
+    }
+
+    function getRandomIntSection(n, m) {
+      return Math.random() * (m - n) + n;
+    }
+
+    async function drawPolyLine2(target, ox) {
+      document.getElementById("condition").innerHTML = "running"
+      let personResume = totalresume.filter(item => item.target === target)
+      preProcessing(personResume)
+      console.log(personResume)
+      let gradient = new gradientColor(ox, '#FFFFFF', personResume.length)
+      for (let j = 1; j <= personResume.length; j++) {
+        if (j == 1) {
+          await f2(500, personResume[j - 1], ox, j);
+        } else {
+          // 渐变
+          // lineColor = gradient[j - 2]
+          let lineColor = ox
+          let trekPosition = [personResume[j - 2].position[0], personResume[j - 2].position[1], personResume[j - 2].position[2], personResume[j - 1].position[0], personResume[j - 1].position[1], personResume[j - 1].position[2]]
+          await f3(2000, target, personResume[j - 1].time, trekPosition, lineColor).then(() => {
+            setTimeout(
+              function () {
+                f1(personResume[j - 1], ox, j);
+              }, 1000
+            )
+          })
+        }
+      }
+    }
+
+    // remove entities
+    function removeEntity(target) {
+      conditionVar = document.getElementById("condition").textContent
+      if (conditionVar == "running") {
+        alert("waiting")
+        return 0
+      } else {
+        for (let i = 0; i <= totalresume.length - 1; i++) {
+          if (totalresume[i].target == target) {
+            let entityPoint = viewer.entities.getById(target + String(totalresume[i].time))
+            let entityLine = viewer.entities.getById(target + String(totalresume[i].time) + "L")
+            let polylines = primitivesManagement.find(target)
+            primitivesManagement.remove(target)
+            viewer.scene.primitives.remove(polylines)
+            viewer.entities.remove(entityPoint)
+            viewer.entities.remove(entityLine)
+          }
+        }
+        let entitytest = viewer.entities.getById(target);
+        viewer.entities.remove(entitytest)
+        return 1
+      }
+    }
+
+    // ------------------------------------------------------------------------------adjustment-----------------------------------------------------------------------
+
+    viewer.scene.fxaa = false;
+    viewer.scene.postProcessStages.fxaa.enabled = true;
+    if (Cesium.FeatureDetection.supportsImageRenderingPixelated()) {
+      viewer.resolutionScale = window.devicePixelRatio;
+    }
+
+    viewer.camera.setView({
+      destination: Cesium.Cartesian3.fromDegrees(110, 32, 3502771),
+      orientation: {
+        heading: 0,
+        pitch: Cesium.Math.toRadians(-90.0),
+        roll: 0
+      }
+    });
+
+  </script>
+</body>
+
+</html>
