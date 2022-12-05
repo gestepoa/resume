@@ -619,8 +619,11 @@
             let removeResult = removeEntity(target)
             if(removeResult == 1) {
               let obj = document.getElementsByName('item');
-              for (i = 0; i < obj.length; i++) {
-                obj[i].checked = false
+              for (let i = 0; i < obj.length; i++) {
+                if (obj[i].value === target) {
+                  obj[i].checked = false
+                  break
+                }
               }
             }
           }
