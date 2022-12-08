@@ -613,8 +613,9 @@
       let divs = document.querySelectorAll(".contextmenu")
       cesiumContainer.removeChild(divs[0]);
       switch (type) {
-        case 'cancel':
-          break
+        case 'chart':
+          console.log('reparing echarts')
+          showPersonChart()
         case 'cesiumObj':
           let entity = viewer.entities.getById(entitiesId);
           if (entity != undefined) {
@@ -632,6 +633,21 @@
           }
           break
       }
+    }
+
+    function showPersonChart() {
+      let con, div= ''
+      div += `<div class="personChart">
+              <div class="personChartPaperWall"></div>
+              <img class="closediv" src="./icon/iconoff.png" onclick="closediv()"></img>
+              </div>`
+              div = document.createElement('div')
+      div.className = "contextmenu"
+      div.style.top = pos.y + 'px'
+      div.style.left = pos.x + 'px'
+      div.style.position = 'fixed'
+      div.innerHTML = con
+      cesiumContainer.append(div)
     }
 
     // left click define
