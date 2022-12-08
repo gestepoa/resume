@@ -64,14 +64,6 @@
         </div>
       </div>
     </dl>
-    <div class="chart">
-      <div class="paperwall"></div>
-      <div class="echarts1" id="Nightingale"></div>
-      <img class="iconcancel" src="./icon/iconoff.png" onclick="hidechart()"></img>
-    </div>
-    <div class="charthide">
-      <img class="iconchart" src="./icon/iconchart2.png" onclick="showchart()"></img>
-    </div>
     <div class="search_box">
       <img src="./icon/search.png"></img>
       <input class="tbox" type="text" name="" value="" placeholder="enter name" onkeypress="actionOnEnter(event)">
@@ -339,7 +331,7 @@
     }
 
     function drawChart(){
-      let myChart = echarts.init(document.getElementById('Nightingale'))
+      let myChart = echarts.init(document.getElementById('Nightingale1'))
       let option = {
         title: {
           text: 'Total Officials ',
@@ -446,21 +438,6 @@
       if (charCode == 13 || charCode == 3) {
         inputSearch()
       }
-    }
-
-    function hidechart() {
-      let node1 = document.querySelector('.chart')
-      let node2 = document.querySelector('.charthide')
-      node1.style.display = 'none'
-      node2.style.display = 'block'
-    }
-
-    function showchart() {
-      let node1 = document.querySelector('.chart')
-      let node2 = document.querySelector('.charthide')
-      node1.style.display = 'block'
-      node2.style.display = 'none'
-      drawChart()
     }
 
     // sub-function of provinceBorder()
@@ -636,18 +613,30 @@
     }
 
     function showPersonChart() {
-      let con, div= ''
-      div += `<div class="personChart">
-              <div class="personChartPaperWall"></div>
+      let con= ''
+      con += `<div class="personChartPaperWall"></div>
+              <div class="personChart1" id="Nightingale1"></div>
               <img class="closediv" src="./icon/iconoff.png" onclick="closediv()"></img>
-              </div>`
-              div = document.createElement('div')
-      div.className = "contextmenu"
-      div.style.top = pos.y + 'px'
-      div.style.left = pos.x + 'px'
-      div.style.position = 'fixed'
+              `
+      let divs = document.querySelectorAll(".personChart")
+      if (divs.length != 0) {
+        cesiumContainer.removeChild(divs[0])
+      }
+      div = document.createElement('div')
+      div.className = "personChart"
+      div.style.top = '10px'
+      div.style.left = '250px'
+      div.style.width = '500px'
+      div.style.height = '500px'
+      div.style.position = 'absolute'
       div.innerHTML = con
       cesiumContainer.append(div)
+      drawChart()
+    }
+
+    function closediv() {
+      let divs = document.querySelectorAll(".personChart")
+      cesiumContainer.removeChild(divs[0]);
     }
 
     // left click define

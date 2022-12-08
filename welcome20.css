@@ -298,18 +298,8 @@ li {
   cursor: pointer;
 }
 
-/* statistics chart */
-.chart {
-  position: absolute;
-  z-index: 1;
-  top: 10px;
-  left: 250px;
-  width: 500px;
-  height: 500px;
-  display: none;
-}
-
-.paperwall {
+/* personal echarts */
+.personChartPaperWall {
   position: absolute;
   background: #fafafa;
   opacity: 0.9;
@@ -318,7 +308,7 @@ li {
   border-radius: 10px;
 }
 
-.echarts1 {
+.personChart1 {
   position: absolute;
   left: 20px;
   top: 20px;
@@ -326,27 +316,11 @@ li {
   height: 460px;
 }
 
-.iconcancel {
+.closediv {
   position: absolute;
   top: 10px;
   left: 10px;
   width: 30px;
   height: 30px;
-  cursor: pointer;
-}
-
-.charthide {
-  position: absolute;
-  z-index: 1;
-  top: 10px;
-  left: 250px;
-  width: 30px;
-  height: 30px;
-  display: block;
-}
-
-.iconchart {
-  height: 100%;
-  width: 100%;
   cursor: pointer;
 }
