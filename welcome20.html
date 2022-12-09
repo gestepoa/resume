@@ -614,8 +614,12 @@
 
     function showPersonChart() {
       let con= ''
+      // con += `<div class="personChartPaperWall"></div>
+      //         <div class="personChart1" id="Nightingale1"></div>
+      //         <img class="closediv" src="./icon/iconoff.png" onclick="closediv()"></img>
+      //         `
       con += `<div class="personChartPaperWall"></div>
-              <div class="personChart1" id="Nightingale1"></div>
+              <div class="personChartOut" id="Nightingale1"></div>
               <img class="closediv" src="./icon/iconoff.png" onclick="closediv()"></img>
               `
       let divs = document.querySelectorAll(".personChart")
@@ -626,9 +630,8 @@
       div.className = "personChart"
       div.style.top = '10px'
       div.style.left = '250px'
-      div.style.width = '500px'
-      div.style.height = '500px'
       div.style.position = 'absolute'
+      div.style.display = 'inline-block'
       div.innerHTML = con
       cesiumContainer.append(div)
       drawChart()
