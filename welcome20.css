@@ -306,7 +306,11 @@ li {
   z-index: 1;
   content: "";
   resize: both;
-  overflow: scroll;
+  overflow: hidden;
+}
+
+.personChartPaperWall::-webkit-resizer {
+  background-color: transparent;
 }
 
 .personChartOut {
@@ -318,19 +322,27 @@ li {
   background: #fafafa;
 }
 
-/* .personChartIn {
+.personChartIn {
   position: absolute;
-  border: 3px solid red;
   top: 20px;
-  width: 460px;
-  height: 460px;
-} */
+  right: 30px;
+  width: 430px;
+  height: 440px;
+}
 
 .closediv {
   position: absolute;
   top: 10px;
-  left: 10px;
-  width: 30px;
-  height: 30px;
+  right: 10px;
+  width: 20px;
+  height: 20px;
   cursor: pointer;
+}
+
+.movediv {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: 20px;
+  height: 20px;
 }

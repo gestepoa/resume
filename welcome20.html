@@ -614,13 +614,12 @@
 
     function showPersonChart() {
       let con= ''
-      // con += `<div class="personChartPaperWall"></div>
-      //         <div class="personChart1" id="Nightingale1"></div>
-      //         <img class="closediv" src="./icon/iconoff.png" onclick="closediv()"></img>
-      //         `
       con += `<div class="personChartPaperWall"></div>
-              <div class="personChartOut" id="Nightingale1"></div>
-              <img class="closediv" src="./icon/iconoff.png" onclick="closediv()"></img>
+              <div class="personChartOut">
+                <div class="personChartIn" id="Nightingale1"></div>
+                <img class="movediv" src="./icon/iconmove.png"></img>
+                <img class="closediv" src="./icon/iconoff.png" onclick="closediv()"></img>
+              </div>
               `
       let divs = document.querySelectorAll(".personChart")
       if (divs.length != 0) {
@@ -793,7 +792,7 @@
       let lab = {
         text: personResume.local + order,
         color: Cesium.Color.fromCssColorString('#fff'),
-        font: 'normal 32px MicroSoft YaHei',
+        font: 'normal 32px SimSun',
         showBackground: true,
         scale: 0.5,
         pixelOffset: new Cesium.Cartesian2(0, -40),
