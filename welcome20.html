@@ -330,7 +330,8 @@
       return(c.sort(sortValue))
     }
 
-    function drawChart(){
+    function drawChart(target){
+      console.log('this is the chart of ' + target)
       let myChart = echarts.init(document.getElementById('Nightingale1'))
       let option = {
         title: {
@@ -556,7 +557,7 @@
         }
       }, Cesium.ScreenSpaceEventType.RIGHT_CLICK)
     }
-
+    // right-click UI,sub-function of loadRightClick()
     function loadUl(pos, textArr, type, entitiesId) {
       let con, lis = ''
       if (textArr != undefined && type != undefined) {
@@ -566,7 +567,7 @@
                   </li>`
         }
         lis += `<li class="li-item" data-index="20">
-                <a href="javascript:rightliClick('chart')" >chart</a>
+                <a href="javascript:rightliClick('chart', '${entitiesId}')" >chart</a>
                 </li>`
         lis += `<li class="li-item" data-index="20">
                 <a href="javascript:rightliClick('cancel')" >cancel</a>
@@ -585,14 +586,15 @@
       div.innerHTML = con
       cesiumContainer.append(div)
     }
-
+    // right-click option,sub-function of loadUI() 
     function rightliClick(type, entitiesId) {
       let divs = document.querySelectorAll(".contextmenu")
       cesiumContainer.removeChild(divs[0]);
       switch (type) {
         case 'chart':
-          console.log('reparing echarts')
-          showPersonChart()
+          let target = entitiesId.replace(/\d+./g, '')
+          showPersonChart(target)
+          break
         case 'cesiumObj':
           let entity = viewer.entities.getById(entitiesId);
           if (entity != undefined) {
@@ -611,8 +613,8 @@
           break
       }
     }
-
-    function showPersonChart() {
+    // function of right-click option menu "chart", sub-function of rightliClick()
+    function showPersonChart(target) {
       let con= ''
       con += `<div class="personChartPaperWall"></div>
               <div class="personChartOut">
@@ -633,7 +635,7 @@
       div.style.display = 'inline-block'
       div.innerHTML = con
       cesiumContainer.append(div)
-      drawChart()
+      drawChart(target)
     }
 
     function closediv() {
@@ -791,8 +793,8 @@
         '</tbody></table>';
       let lab = {
         text: personResume.local + order,
-        color: Cesium.Color.fromCssColorString('#fff'),
-        font: 'normal 32px SimSun',
+        color: Cesium.Color.fromCssColorString('#FFFFFF'),
+        font: 'normal 36px SimSun',
         showBackground: true,
         scale: 0.5,
         pixelOffset: new Cesium.Cartesian2(0, -40),
