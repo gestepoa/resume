@@ -299,7 +299,7 @@
     dict1.add("党政军学", "party_gov_mil_university");
 
     // ---------------------------------------------------------------------------chart------------------------------------------------------------------------
-    // key-value mode object
+    // key-value mode object with distinct keys
     function countArr(arr) {
       let hashArr = [...new Set(arr)];
       let list = [];
@@ -313,6 +313,7 @@
           name: item
         })
       })
+      console.log(newArr)
       return newArr;
     }
     // rank function
@@ -320,22 +321,31 @@
       return b.value - a.value;
     }
     
-    function getChartProvince(totalresume) {
+    function getChartProvince(personChartResume) {
       let a = []
-      for (let i = 0; i <= totalresume.length - 1; i++) {
-        let b = totalresume[i].province
+      for (let i = 0; i <= personChartResume.length - 1; i++) {
+        let b = personChartResume[i].province
         a.push(b)
       }
       let c = countArr(a)
       return(c.sort(sortValue))
     }
 
+    function getChartDuration(personChartResume) {
+      let a = []
+      for (let i = 0; i <= personChartResume.length - 1; i++) {
+        let b = {value:personChartResume[i].duration, name:personChartResume[i].local}
+        a.push(b)
+      }
+      return(a.sort(sortValue))
+    }
+
     function drawChart(target){
-      console.log('this is the chart of ' + target)
+      let personChartResume = totalresume.filter(item => item.target === target)
       let myChart = echarts.init(document.getElementById('Nightingale1'))
       let option = {
         title: {
-          text: 'Total Officials ',
+          text: 'Duration Years ',
           subtext: 'Data Upgrading',
           left: 'center'
         },
@@ -361,7 +371,7 @@
           itemStyle: {borderRadius: 5},
           label: {show: false},
           emphasis: {label: {show: true}},
-          data: getChartProvince(totalresume)
+          data: getChartDuration(personChartResume)
         }]
       };
       myChart.setOption(option);
