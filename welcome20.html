@@ -341,6 +341,7 @@
     }
 
     function drawChart(target){
+      console.log('this is the chart of ' + target)
       let personChartResume = totalresume.filter(item => item.target === target)
       let myChart = echarts.init(document.getElementById('Nightingale1'))
       let option = {
