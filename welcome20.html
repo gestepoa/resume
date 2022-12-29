@@ -313,7 +313,6 @@
           name: item
         })
       })
-      console.log(newArr)
       return newArr;
     }
     // rank function
@@ -333,10 +332,31 @@
 
     function getChartDuration(personChartResume) {
       let a = []
+      let localVar = []
       for (let i = 0; i <= personChartResume.length - 1; i++) {
-        let b = {value:personChartResume[i].duration, name:personChartResume[i].local}
-        a.push(b)
+        let local = personChartResume[i].local
+        localVar.push(local)
       }
+      let localVarDistinct = countArr(localVar)
+      console.log(localVarDistinct)
+      for (let j = 0; j <= localVarDistinct.length - 1; j++){
+        if (localVarDistinct[j].value > 1) {
+          let personChartResumeDup = personChartResume.filter(item => item.local === localVarDistinct[j].name)
+          let yearsSum = 0
+          for (let k = 0; k <= personChartResumeDup.length - 1; k++) {
+            yearsSum = yearsSum + personChartResumeDup[k].duration
+          }
+          let b = {value:yearsSum, name:localVarDistinct[j].name}
+          a.push(b)
+        } else if (localVarDistinct[j].value == 1) {
+          let personChartResumeDup = personChartResume.filter(item => item.local === localVarDistinct[j].name)
+          let b = {value:personChartResumeDup[0].duration, name:localVarDistinct[j].name}
+          a.push(b)
+        } else {
+          console.log("distinct function error")
+        }
+      }
+      console.log(a)
       return(a.sort(sortValue))
     }
 
