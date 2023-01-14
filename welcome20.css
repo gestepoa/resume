@@ -243,7 +243,7 @@ li {
   position: absolute;
   z-index: 1; 
   top: 8px;
-  right: 100px;
+  right: 140px;
   height: 30px;
   display: flex;
   justify-content: center;
@@ -278,6 +278,22 @@ li {
   cursor: pointer;
 }
 
+/* line chart button */
+.line_chart {
+  position: absolute;
+  z-index: 1;
+  top: 8px;
+  right: 100px;
+  height: 30px;
+  width: 30px;
+}
+
+.line_chart img {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
 /* border button */
 .borderbtn {
   position: absolute;
@@ -300,7 +316,7 @@ li {
 
 /* personal echarts */
 .personChartPaperWall {
-  background: #666;
+  /* background: #666; */
   position: relative;
   width: 20px;
   height: 20px;

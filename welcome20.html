@@ -28,9 +28,9 @@
       </div>
       <div class="ddcondition">
         <div id="condition">condition</div>
-        <p><input id="p1" type="checkbox" name="item" value="栗战书" onclick="test1(this)"><label for="p1">栗战书</label></p>
+        <p><input id="p1" type="checkbox" name="item" value="陈希" onclick="test1(this)"><label for="p1">陈希</label></p>
         <p><input id="p2" type="checkbox" name="item" value="王沪宁" onclick="test1(this)"><label for="p2">王沪宁</label></p>
-        <p><input id="p3" type="checkbox" name="item" value="胡春华" onclick="test1(this)"><label for="p3">胡春华</label></p>
+        <p><input id="p3" type="checkbox" name="item" value="陈一新" onclick="test1(this)"><label for="p3">陈一新</label></p>
         <p><input id="p4" type="checkbox" name="item" value="骆惠宁" onclick="test1(this)"><label for="p4">骆惠宁</label></p>
         <p><input id="p5" type="checkbox" name="item" value="李强" onclick="test1(this)"><label for="p5">李强</label></p>
         <p><input id="p6" type="checkbox" name="item" value="陈敏尔" onclick="test1(this)"><label for="p6">陈敏尔</label></p>
@@ -68,6 +68,9 @@
       <img src="./icon/search.png"></img>
       <input class="tbox" type="text" name="" value="" placeholder="enter name" onkeypress="actionOnEnter(event)">
       <button class="btn" type="button" name="button" onclick="inputSearch()">subscribe</button>
+    </div>
+    <div class="line_chart">
+      <img src="./icon/iconchart4.png" onclick="drawLineChart()"></img>
     </div>
     <div class="borderbtn">
       <img src="./icon/iconborder.png" onclick="provinceBorder()"></img>
@@ -213,6 +216,7 @@
     new CesiumNavigation(viewer, options);
 
     // ----------------------------------------------------------------------dictionary-------------------------------------------------------------------------------
+    // define class
     class Dictionary {
       constructor() {
         this.dataStore = {}
@@ -273,6 +277,7 @@
 
     // store primitive object
     var primitivesManagement = new Dictionary();
+    
     // store img name
     var dict1 = new Dictionary();
     dict1.add("党", "party");
@@ -397,6 +402,8 @@
       };
       myChart.setOption(option);
     }
+
+    function drawLineChart() {}
 
     // ---------------------------------------------------------------------------interaction-------------------------------------------------------------------------
 
