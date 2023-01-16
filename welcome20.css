@@ -363,3 +363,11 @@ li {
   width: 20px;
   height: 20px;
 }
+
+/* test chart area*/
+/* 2023/1/17 echart with Stacked Line */
+.testChartPaperWall {
+  background: red;
+  width: 100px;
+  height: 100px;
+}

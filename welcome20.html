@@ -403,7 +403,23 @@
       myChart.setOption(option);
     }
 
-    function drawLineChart() {}
+    function drawLineChart() {
+      console.log('start')
+      // let con= ''
+      // con += `<div class="testChartPaperWall"></div>
+      //        `
+      let div = document.createElement('div')
+      div.className = "testChart"
+      div.style.top = '10px'
+      div.style.left = '250px'
+      // div.style.width = '100px'
+      // div.style.height = '100px'
+      // div.style.background = 'red'
+      div.style.position = 'absolute'
+      div.style.display = 'inline-block'
+      // div.innerHTML = con
+      cesiumContainer.append(div)
+    }
 
     // ---------------------------------------------------------------------------interaction-------------------------------------------------------------------------
 
