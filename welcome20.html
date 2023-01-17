@@ -37,9 +37,12 @@
         <p><input id="p7" type="checkbox" name="item" value="丁薛祥" onclick="test1(this)"><label for="p7">丁薛祥</label></p>
         <p><input id="p8" type="checkbox" name="item" value="蔡奇" onclick="test1(this)"><label for="p8">蔡奇</label></p>
         <p><input id="p9" type="checkbox" name="item" value="李希" onclick="test1(this)"><label for="p9">李希</label></p>
-        <p><input id="p10" type="checkbox" name="item" value="楼阳生" onclick="test1(this)"><label for="p10">楼阳生</label></p>
-        <p><input id="p11" type="checkbox" name="item" value="赵乐际" onclick="test1(this)"><label for="p11">赵乐际</label></p>
-        <p><input id="p12" type="checkbox" name="item" value="习近平" onclick="test1(this)"><label for="p12">习近平</label></p>
+        <p><input id="p10" type="checkbox" name="item" value="楼阳生" onclick="test1(this)"><label for="p10">楼阳生</label>
+        </p>
+        <p><input id="p11" type="checkbox" name="item" value="赵乐际" onclick="test1(this)"><label for="p11">赵乐际</label>
+        </p>
+        <p><input id="p12" type="checkbox" name="item" value="习近平" onclick="test1(this)"><label for="p12">习近平</label>
+        </p>
       </div>
       <div class="legend">
         <div class="part1">
@@ -70,7 +73,7 @@
       <button class="btn" type="button" name="button" onclick="inputSearch()">subscribe</button>
     </div>
     <div class="line_chart">
-      <img src="./icon/iconchart4.png" onclick="drawLineChart()"></img>
+      <img src="./icon/iconchart4.png" onclick="drawLineChartPre()"></img>
     </div>
     <div class="borderbtn">
       <img src="./icon/iconborder.png" onclick="provinceBorder()"></img>
@@ -277,7 +280,7 @@
 
     // store primitive object
     var primitivesManagement = new Dictionary();
-    
+
     // store img name
     var dict1 = new Dictionary();
     dict1.add("党", "party");
@@ -324,7 +327,7 @@
     function sortValue(a, b) {
       return b.value - a.value;
     }
-    
+
     function getChartProvince(personChartResume) {
       let a = []
       for (let i = 0; i <= personChartResume.length - 1; i++) {
@@ -332,7 +335,7 @@
         a.push(b)
       }
       let c = countArr(a)
-      return(c.sort(sortValue))
+      return (c.sort(sortValue))
     }
 
     function getChartDuration(personChartResume) {
@@ -344,28 +347,28 @@
       }
       let localVarDistinct = countArr(localVar)
       console.log(localVarDistinct)
-      for (let j = 0; j <= localVarDistinct.length - 1; j++){
+      for (let j = 0; j <= localVarDistinct.length - 1; j++) {
         if (localVarDistinct[j].value > 1) {
           let personChartResumeDup = personChartResume.filter(item => item.local === localVarDistinct[j].name)
           let yearsSum = 0
           for (let k = 0; k <= personChartResumeDup.length - 1; k++) {
             yearsSum = yearsSum + personChartResumeDup[k].duration
           }
-          let b = {value:yearsSum, name:localVarDistinct[j].name}
+          let b = { value: yearsSum, name: localVarDistinct[j].name }
           a.push(b)
         } else if (localVarDistinct[j].value == 1) {
           let personChartResumeDup = personChartResume.filter(item => item.local === localVarDistinct[j].name)
-          let b = {value:personChartResumeDup[0].duration, name:localVarDistinct[j].name}
+          let b = { value: personChartResumeDup[0].duration, name: localVarDistinct[j].name }
           a.push(b)
         } else {
           console.log("distinct function error")
         }
       }
       console.log(a)
-      return(a.sort(sortValue))
+      return (a.sort(sortValue))
     }
 
-    function drawChart(target){
+    function drawChart(target) {
       console.log('this is the chart of ' + target)
       let personChartResume = totalresume.filter(item => item.target === target)
       let myChart = echarts.init(document.getElementById('Nightingale1'))
@@ -394,16 +397,16 @@
           radius: [20, 140],
           center: ['50%', '50%'],
           roseType: 'radius',
-          itemStyle: {borderRadius: 5},
-          label: {show: false},
-          emphasis: {label: {show: true}},
+          itemStyle: { borderRadius: 5 },
+          label: { show: false },
+          emphasis: { label: { show: true } },
           data: getChartDuration(personChartResume)
         }]
       };
       myChart.setOption(option);
     }
 
-    function drawLineChart() {
+    function drawLineChartPre() {
       console.log('start')
       // let con= ''
       // con += `<div class="testChartPaperWall"></div>
@@ -412,14 +415,60 @@
       div.className = "testChart"
       div.style.top = '10px'
       div.style.left = '250px'
-      // div.style.width = '100px'
-      // div.style.height = '100px'
-      // div.style.background = 'red'
+      div.style.width = '200px'
+      div.style.height = '200px'
+      div.style.background = 'red'
       div.style.position = 'absolute'
       div.style.display = 'inline-block'
       // div.innerHTML = con
       cesiumContainer.append(div)
+      drawLineChart()
     }
+
+    function drawLineChart() {
+      let myChart = echarts.init(document.getElementById('line'))
+      let option = {
+        title: {
+          text: 'Stacked Line'
+        },
+        tooltip: {
+          trigger: 'axis'
+        },
+        legend: {
+          data: ['Email', 'Union Ads', 'Video Ads', 'Direct', 'Search Engine']
+        },
+        grid: {
+          left: '3%',
+          right: '4%',
+          bottom: '3%',
+          containLabel: true
+        },
+        toolbox: {
+          feature: {
+            saveAsImage: {}
+          }
+        },
+        xAxis: {
+          type: 'category',
+          boundaryGap: false,
+          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        },
+        yAxis: {
+          type: 'category',
+          data: ['a', 'b', 'c', 'd', 'e', 'f', 'g']
+        },
+        series: [
+          {
+            name: 'Email',
+            type: 'line',
+            stack: 'Total',
+            data: ['b', 'g', 'f', 'g', 'c', 'g', 'a']
+          }
+        ]
+      }
+      myChart.setOption(option)
+    }
+
 
     // ---------------------------------------------------------------------------interaction-------------------------------------------------------------------------
 
@@ -654,7 +703,7 @@
           if (entity != undefined) {
             let target = entitiesId.replace(/\d+./g, '')
             let removeResult = removeEntity(target)
-            if(removeResult == 1) {
+            if (removeResult == 1) {
               let obj = document.getElementsByName('item');
               for (let i = 0; i < obj.length; i++) {
                 if (obj[i].value === target) {
@@ -669,7 +718,7 @@
     }
     // function of right-click option menu "chart", sub-function of rightliClick()
     function showPersonChart(target) {
-      let con= ''
+      let con = ''
       con += `<div class="personChartPaperWall"></div>
               <div class="personChartOut">
                 <div class="personChartIn" id="Nightingale1"></div>
