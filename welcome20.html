@@ -408,25 +408,28 @@
 
     function drawLineChartPre() {
       console.log('start')
-      // let con= ''
-      // con += `<div class="testChartPaperWall"></div>
-      //        `
+      let con= ''
+      con += `<div class="lineChartOut">
+                <div class="lineChartIn" id="Nightingale1"></div>
+                <img class="closediv" src="./icon/iconoff.png" onclick="closediv()"></img>
+              </div>
+              `
       let div = document.createElement('div')
-      div.className = "testChart"
+      div.className = "lineChart"
       div.style.top = '10px'
       div.style.left = '250px'
-      div.style.width = '200px'
-      div.style.height = '200px'
-      div.style.background = 'red'
+      // div.style.width = '1000px'
+      // div.style.height = '700px'
+      // div.style.background = 'red'
       div.style.position = 'absolute'
       div.style.display = 'inline-block'
-      // div.innerHTML = con
+      div.innerHTML = con
       cesiumContainer.append(div)
       drawLineChart()
     }
 
     function drawLineChart() {
-      let myChart = echarts.init(document.getElementById('line'))
+      let myChart = echarts.init(document.getElementById('stackedLine'))
       let option = {
         title: {
           text: 'Stacked Line'
