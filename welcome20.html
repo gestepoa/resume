@@ -411,7 +411,7 @@
       let con= ''
       con += `<div class="lineChartOut">
                 <div class="lineChartIn" id="stackedLine"></div>
-                <img class="closediv" src="./icon/iconoff.png" onclick="closediv()"></img>
+                <img class="closeLineChartDiv" src="./icon/iconoff.png" onclick="closeLineChartDiv()"></img>
               </div>
               `
       let div = document.createElement('div')
@@ -423,6 +423,11 @@
       div.innerHTML = con
       cesiumContainer.append(div)
       drawLineChart()
+    }
+
+    function closeLineChartDiv() {
+      let divs = document.querySelectorAll(".lineChart")
+      cesiumContainer.removeChild(divs[0]);
     }
 
     function drawLineChart() {
