@@ -404,6 +404,11 @@
                 <img class="closeLineChartDiv" src="./icon/iconoff.png" onclick="closediv('.lineChart')"></img>
               </div>
               `
+      let divs = document.querySelectorAll(".lineChart")
+      if (divs.length != 0) {
+        cesiumContainer.removeChild(divs[0])
+        console.log("past line chart delete")
+      }
       let div = document.createElement('div')
       div.className = "lineChart"
       div.style.top = '10px'
