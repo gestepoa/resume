@@ -91,7 +91,7 @@
     var tiandituyx = new Cesium.ProviderViewModel({
       name: "天地图综合",
       tooltip: "影像和中文注记",
-      iconUrl: "./icontianditu.png",
+      iconUrl: "./icon/icontianditu.png",
       creationFunction: function () {
         var mapsources = [];
         var yx = new Cesium.WebMapTileServiceImageryProvider({
@@ -186,8 +186,8 @@
     // create earth
     var viewer = new Cesium.Viewer("cesiumContainer", {
       baseLayerPicker: true,
-      // imageryProviderViewModels: imageryViewModels,
-      // selectedImageryProviderViewModel: tiandituyx,
+      imageryProviderViewModels: imageryViewModels,
+      selectedImageryProviderViewModel: gaodesl,
       geocoder: false,
       homeButton: false,
       sceneModePicker: false,
@@ -224,36 +224,28 @@
       constructor() {
         this.dataStore = {}
       }
-
       add(key, value) {
         this.dataStore[key] = value
       }
-
       update(key, value) {
         this.remove(key)
         this.dataStore[key] = value
       }
-
       find(key) {
         return this.dataStore[key]
       }
-
       remove(key) {
         delete this.dataStore[key]
       }
-
       getKeys() {
         return Object.keys(this.dataStore)
       }
-
       getKeysSort() {
         return this.getKeys().sort()
       }
-
       count() {
         return this.getKeys().length
       }
-
       showAll() {
         let res = ''
         this.getKeys().forEach(key => {
@@ -261,7 +253,6 @@
         })
         return res.slice(1)
       }
-
       showAllSort() {
         let res = ''
         this.getKeys().sort().forEach(key => {
@@ -269,7 +260,6 @@
         })
         return res.slice(1)
       }
-
       clear() {
         this.getKeys().forEach(key => {
           delete this.dataStore[key]
@@ -411,7 +401,7 @@
       let con= ''
       con += `<div class="lineChartOut">
                 <div class="lineChartIn" id="stackedLine"></div>
-                <img class="closeLineChartDiv" src="./icon/iconoff.png" onclick="closeLineChartDiv()"></img>
+                <img class="closeLineChartDiv" src="./icon/iconoff.png" onclick="closediv('.lineChart')"></img>
               </div>
               `
       let div = document.createElement('div')
@@ -425,10 +415,10 @@
       drawLineChart()
     }
 
-    function closeLineChartDiv() {
-      let divs = document.querySelectorAll(".lineChart")
-      cesiumContainer.removeChild(divs[0]);
-    }
+    // function closeLineChartDiv(divClassName) {
+    //   let divs = document.querySelectorAll(divClassName)
+    //   cesiumContainer.removeChild(divs[0]);
+    // }
 
     function drawLineChart() {
       let myChart = echarts.init(document.getElementById('stackedLine'))
@@ -728,7 +718,7 @@
               <div class="personChartOut">
                 <div class="personChartIn" id="Nightingale1"></div>
                 <img class="movediv" src="./icon/iconmove.png"></img>
-                <img class="closediv" src="./icon/iconoff.png" onclick="closediv()"></img>
+                <img class="closediv" src="./icon/iconoff.png" onclick="closediv('.personChart')"></img>
               </div>
               `
       let divs = document.querySelectorAll(".personChart")
@@ -746,8 +736,8 @@
       drawChart(target)
     }
 
-    function closediv() {
-      let divs = document.querySelectorAll(".personChart")
+    function closediv(divClassName) {
+      let divs = document.querySelectorAll(divClassName)
       cesiumContainer.removeChild(divs[0]);
     }
 
