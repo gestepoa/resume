@@ -369,15 +369,15 @@ li {
 .lineChartOut {
   position: absolute;
   width: 1000px;
-  height: 700px;
-  background: #ae1717;
+  height: 720px;
+  background: #bacdf3;
 }
 
 .lineChartIn {
   position: absolute;
   top: 20px;
   width: 1000px;
-  height: 660px;
+  height: 680px;
   background: #fafafa;
 }
 
