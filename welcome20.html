@@ -397,7 +397,7 @@
     }
 
     function drawLineChartPre() {
-      console.log('start')
+      console.log('start drawing line chart')
       let con= ''
       con += `<div class="lineChartOut">
                 <div class="lineChartIn" id="stackedLine"></div>
@@ -420,10 +420,17 @@
       drawLineChart()
     }
 
-    // function closeLineChartDiv(divClassName) {
-    //   let divs = document.querySelectorAll(divClassName)
-    //   cesiumContainer.removeChild(divs[0]);
-    // }
+    // close(delete) a div by searching its class name
+    function closediv(divClassName) {
+      let divs = document.querySelectorAll(divClassName)
+      cesiumContainer.removeChild(divs[0]);
+    }
+
+    function getLineChartXAisData() {}
+
+    function getLineChartYAisData() {}
+
+    function getLineChartSeriesData() {}
 
     function drawLineChart() {
       let myChart = echarts.init(document.getElementById('stackedLine'))
@@ -739,11 +746,6 @@
       div.innerHTML = con
       cesiumContainer.append(div)
       drawChart(target)
-    }
-
-    function closediv(divClassName) {
-      let divs = document.querySelectorAll(divClassName)
-      cesiumContainer.removeChild(divs[0]);
     }
 
     // left click define
