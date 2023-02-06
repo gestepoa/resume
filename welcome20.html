@@ -37,12 +37,9 @@
         <p><input id="p7" type="checkbox" name="item" value="丁薛祥" onclick="test1(this)"><label for="p7">丁薛祥</label></p>
         <p><input id="p8" type="checkbox" name="item" value="蔡奇" onclick="test1(this)"><label for="p8">蔡奇</label></p>
         <p><input id="p9" type="checkbox" name="item" value="李希" onclick="test1(this)"><label for="p9">李希</label></p>
-        <p><input id="p10" type="checkbox" name="item" value="楼阳生" onclick="test1(this)"><label for="p10">楼阳生</label>
-        </p>
-        <p><input id="p11" type="checkbox" name="item" value="赵乐际" onclick="test1(this)"><label for="p11">赵乐际</label>
-        </p>
-        <p><input id="p12" type="checkbox" name="item" value="习近平" onclick="test1(this)"><label for="p12">习近平</label>
-        </p>
+        <p><input id="p10" type="checkbox" name="item" value="楼阳生" onclick="test1(this)"><label for="p10">楼阳生</label></p>
+        <p><input id="p11" type="checkbox" name="item" value="赵乐际" onclick="test1(this)"><label for="p11">赵乐际</label></p>
+        <p><input id="p12" type="checkbox" name="item" value="陈文清" onclick="test1(this)"><label for="p12">陈文清</label></p>
       </div>
       <div class="legend">
         <div class="part1">
@@ -396,6 +393,7 @@
       myChart.setOption(option);
     }
 
+    // drawing line chart and build the html div
     function drawLineChartPre() {
       console.log('start drawing line chart')
       let con= ''
@@ -427,11 +425,9 @@
     }
 
     function getLineChartXAisData() {}
-
-    function getLineChartYAisData() {}
-
     function getLineChartSeriesData() {}
 
+    // function of create an echarts line chart 
     function drawLineChart() {
       let myChart = echarts.init(document.getElementById('stackedLine'))
       let option = {
@@ -443,6 +439,7 @@
         },
         legend: {
           data: ['Email', 'Union Ads', 'Video Ads', 'Direct', 'Search Engine']
+          // data: getLineChartLegendData()
         },
         grid: {
           left: '3%',
@@ -456,20 +453,28 @@
           }
         },
         xAxis: {
-          type: 'category',
-          boundaryGap: false,
-          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+          type: 'value',
+          min: 1980,
+          max: 2023,
+          "axisLine": {
+            "show": true
+          },
+          "axisTick": {
+            "show": true
+          }
         },
         yAxis: {
           type: 'category',
-          data: ['a', 'b', 'c', 'd', 'e', 'f', 'g']
+          boundaryGap: false,
+          data: ['河北','山西','黑龙江','吉林','辽宁','江苏','浙江','安徽','福建','江西','山东','河南','湖北','湖南','广东','海南','四川',
+                 '贵州','云南','陕西','甘肃','青海','台湾','内蒙古','广西','西藏','宁夏','新疆','北京','天津','上海','重庆','香港','澳门']
         },
         series: [
           {
             name: 'Email',
             type: 'line',
             stack: 'Total',
-            data: ['b', 'g', 'f', 'g', 'c', 'g', 'a']
+            data: [[1984,'北京'], [1998,'上海'], [2004,'重庆'], [2005,'四川'], [2008,'云南'], [2009,'西藏'], [2018,'新疆']]
           }
         ]
       }
