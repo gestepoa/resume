@@ -82,6 +82,23 @@
 
     function tempfunc() {
       console.log(primitivesManagement)
+      let nameList = primitivesManagement.getKeys()
+      for(let i = 0; i<=nameList.length-1; i++) {
+        let personLineChartResume = totalresume.filter(item => item.target === nameList[i])
+        console.log(personLineChartResume)
+        let seriesItemData = []
+        for(let j = 0; j <= personLineChartResume.length - 1; j++){
+          let times = personLineChartResume[j].duration
+          let yData = personLineChartResume[j].province
+          let xData = personLineChartResume[j].time
+          let xyData = []
+          for(let k = 0; k <= times; k++){
+            xyData[k] = [xData + k, yData];
+          }
+          seriesItemData = seriesItemData.concat(xyData)
+        }
+        console.log(seriesItemData)
+      }
     }
     // imageryProvider
     var imageryViewModels = [];
