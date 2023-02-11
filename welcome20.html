@@ -73,33 +73,13 @@
       <img src="./icon/iconchart4.png" onclick="drawLineChartPre()"></img>
     </div>
     <div class="borderbtn">
-      <img src="./icon/iconborder.png" onclick="tempfunc()"></img>
+      <img src="./icon/iconborder.png" onclick="getLineChartSeriesData()"></img>
     </div>
   </div>
   <script>
 
     // -----------------------------------------------------------------------map service-----------------------------------------------------------------------------
 
-    function tempfunc() {
-      console.log(primitivesManagement)
-      let nameList = primitivesManagement.getKeys()
-      for(let i = 0; i<=nameList.length-1; i++) {
-        let personLineChartResume = totalresume.filter(item => item.target === nameList[i])
-        console.log(personLineChartResume)
-        let seriesItemData = []
-        for(let j = 0; j <= personLineChartResume.length - 1; j++){
-          let times = personLineChartResume[j].duration
-          let yData = personLineChartResume[j].province
-          let xData = personLineChartResume[j].time
-          let xyData = []
-          for(let k = 0; k <= times; k++){
-            xyData[k] = [xData + k, yData];
-          }
-          seriesItemData = seriesItemData.concat(xyData)
-        }
-        console.log(seriesItemData)
-      }
-    }
     // imageryProvider
     var imageryViewModels = [];
 
@@ -444,8 +424,29 @@
       cesiumContainer.removeChild(divs[0]);
     }
 
-    function getLineChartXAisData() {}
-    function getLineChartSeriesData() {}
+    function getLineChartSeriesData() {
+      console.log(primitivesManagement)
+      let seriesList = []
+      let nameList = primitivesManagement.getKeys()
+      for(let i = 0; i<=nameList.length-1; i++) {
+        let personLineChartResume = totalresume.filter(item => item.target === nameList[i])
+        let seriesItemData = []
+        for(let j = 0; j <= personLineChartResume.length - 1; j++){
+          let times = personLineChartResume[j].duration
+          let yData = personLineChartResume[j].province
+          let xData = personLineChartResume[j].time
+          let xyData = []
+          for(let k = 0; k <= times; k++){
+            xyData[k] = [xData + k, yData];
+          }
+          seriesItemData = seriesItemData.concat(xyData)
+        }
+        let seriesItem = {name: String(nameList[i]), type: 'line', data: seriesItemData}
+        seriesList.push(seriesItem)
+      }
+      console.log(seriesList)
+      return seriesList
+    }
 
     // function of create an echarts line chart 
     function drawLineChart() {
@@ -454,12 +455,15 @@
         title: {
           text: 'Stacked Line'
         },
-        tooltip: {
-          trigger: 'axis'
-        },
+        // tooltip: {
+        //   trigger: 'axis'
+        // },
         legend: {
-          data: ['Email', 'Union Ads', 'Video Ads', 'Direct', 'Search Engine']
-          // data: getLineChartLegendData()
+          orient: 'horizontal',
+          textStyle: {
+            fontSize: '16px',
+            fontWeight: 600
+        }
         },
         grid: {
           left: '3%',
@@ -489,14 +493,7 @@
           data: ['河北','山西','黑龙江','吉林','辽宁','江苏','浙江','安徽','福建','江西','山东','河南','湖北','湖南','广东','海南','四川',
                  '贵州','云南','陕西','甘肃','青海','台湾','内蒙古','广西','西藏','宁夏','新疆','北京','天津','上海','重庆','香港','澳门']
         },
-        series: [
-          {
-            name: 'Email',
-            type: 'line',
-            stack: 'Total',
-            data: [[1984,'北京'], [1998,'上海'], [2004,'重庆'], [2005,'四川'], [2008,'云南'], [2009,'西藏'], [2018,'新疆']]
-          }
-        ]
+        series: getLineChartSeriesData()
       }
       myChart.setOption(option)
     }
