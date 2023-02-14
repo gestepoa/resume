@@ -435,9 +435,10 @@
           let times = personLineChartResume[j].duration
           let yData = personLineChartResume[j].province
           let xData = personLineChartResume[j].time
+          let additionData = personLineChartResume[j].local
           let xyData = []
           for(let k = 0; k <= times; k++){
-            xyData[k] = [xData + k, yData];
+            xyData[k] = [xData + k, yData, additionData];
           }
           seriesItemData = seriesItemData.concat(xyData)
         }
@@ -457,7 +458,13 @@
         },
         tooltip: {
           trigger: 'axis',
-          formatter: '{a} <br/>{b} : {c}'
+          axisPointer: {
+            type: 'none'
+          },
+          formatter: function(params) {
+            console.log(params)
+            return '年份：' + params[0]['data'][0] + '</br>'+'地点：' + params[0]['data'][2]
+          }
         },
         legend: {
           orient: 'horizontal',
