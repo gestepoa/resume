@@ -464,6 +464,7 @@
           triggerOn: 'none',
           formatter: function(params) {
             console.log(params)
+            console.log(currentHoverIndex)
             return '年份：' + params[0]['data'][0] + '</br>'+'地点：' + params[0]['data'][2]
           }
         },
@@ -505,12 +506,17 @@
         series: getLineChartSeriesData()
       }
       myChart.setOption(option)
+      let currentHoverIndex = {}
       myChart.on('click', function(params) {
-        let currentHoverIndex = {line: params['seriesIndex'], data: params['data']}
-        console.log(currentHoverIndex)
-      })
-      myChart.dispatchAction({
-        type: 'showTip'
+        currentHoverIndex = {line: params['seriesIndex'], data: params['data']}
+        console.log(params)
+        const { seriesIndex, event } = params
+        myChart.dispatchAction({
+          type: 'showTip',
+          x: event.offsetX,
+          y: event.offsetY,
+          position: [event.offsetX, event.offsetY],
+        })
       })
     }
 
