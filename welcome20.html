@@ -442,7 +442,7 @@
           }
           seriesItemData = seriesItemData.concat(xyData)
         }
-        let seriesItem = {name: String(nameList[i]), type: 'line', data: seriesItemData}
+        let seriesItem = {name: String(nameList[i]), type: 'line', triggerLineEvent: true, data: seriesItemData}
         seriesList.push(seriesItem)
       }
       console.log(seriesList)
@@ -461,6 +461,7 @@
           axisPointer: {
             type: 'none'
           },
+          triggerOn: 'none',
           formatter: function(params) {
             console.log(params)
             return '年份：' + params[0]['data'][0] + '</br>'+'地点：' + params[0]['data'][2]
@@ -504,16 +505,13 @@
         series: getLineChartSeriesData()
       }
       myChart.setOption(option)
-      // myChart.on('click', function(params) {
-      //   const { seriesIndex, event } = params
-      //   let currentHoverIndex = seriesIndex 
-      //   chart.value?.dispatchAction({
-      //     type: 'showTip',
-      //     x: event.offsetX,
-      //     y: event.offsetY,
-      //     position: [event.offsetX, event.offsetY]
-      //   })
-      // })
+      myChart.on('click', function(params) {
+        let currentHoverIndex = {line: params['seriesIndex'], data: params['data']}
+        console.log(currentHoverIndex)
+      })
+      myChart.dispatchAction({
+        type: 'showTip'
+      })
     }
 
 
