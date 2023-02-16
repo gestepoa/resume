@@ -463,9 +463,18 @@
           },
           triggerOn: 'none',
           formatter: function(params) {
+            console.log('this is tooltip para')
             console.log(params)
             console.log(currentHoverIndex)
-            return '年份：' + params[0]['data'][0] + '</br>'+'地点：' + params[0]['data'][2]
+            for (let i = 0; i <= params.length - 1; i++){
+              if (params[i]['data'][0] === currentHoverIndex['data'][0]){
+                return '姓名：' + params[i]['seriesName'] + '</br>' +
+                       '年份：' + params[i]['data'][0] + '</br>' + 
+                       '省份：' + params[i]['data'][1] + '</br>' + 
+                       '地点：' + params[i]['data'][2]
+                break
+              }
+            }
           }
         },
         legend: {
@@ -507,15 +516,25 @@
       }
       myChart.setOption(option)
       let currentHoverIndex = {}
-      myChart.on('click', function(params) {
-        currentHoverIndex = {line: params['seriesIndex'], data: params['data']}
-        console.log(params)
-        const { seriesIndex, event } = params
+      myChart.on('mouseover', function(params) {
+        if (params['data'] !== undefined) {
+          currentHoverIndex = {line: params['seriesIndex'], data: params['data']}
+          console.log('this is click para')
+          console.log(params)
+          console.log(currentHoverIndex)
+          const { seriesIndex, event } = params
+          myChart.dispatchAction({
+            type: 'showTip',
+            x: event.offsetX,
+            y: event.offsetY,
+            position: [event.offsetX, event.offsetY],
+          })
+        }
+      })
+
+      myChart.on('mouseout', function(){
         myChart.dispatchAction({
-          type: 'showTip',
-          x: event.offsetX,
-          y: event.offsetY,
-          position: [event.offsetX, event.offsetY],
+          type: 'hideTip'
         })
       })
     }
