@@ -459,11 +459,10 @@
         tooltip: {
           trigger: 'axis',
           axisPointer: {
-            type: 'none'
+            type: 'shadow'
           },
           triggerOn: 'none',
           formatter: function(params) {
-            console.log('this is tooltip para')
             console.log(params)
             console.log(currentHoverIndex)
             let personalTip = ''
@@ -510,8 +509,8 @@
         yAxis: {
           type: 'category',
           boundaryGap: false,
-          data: ['河北','山西','黑龙江','吉林','辽宁','江苏','浙江','安徽','福建','江西','山东','河南','湖北','湖南','广东','海南','四川',
-                 '贵州','云南','陕西','甘肃','青海','台湾','内蒙古','广西','西藏','宁夏','新疆','北京','天津','上海','重庆','香港','澳门']
+          data: ['黑龙江','吉林','辽宁','江苏','浙江','安徽','福建','江西','河北','河南','山西','山东','湖北','湖南','广东','海南','四川',
+                 '贵州','云南','陕西','甘肃','青海','宁夏','内蒙古','广西','西藏','新疆','重庆','天津','上海','北京','台湾','澳门','香港']
         },
         series: getLineChartSeriesData()
       }
@@ -520,7 +519,6 @@
       myChart.on('mouseover', function(params) {
         if (params['data'] !== undefined) {
           currentHoverIndex = {line: params['seriesIndex'], data: params['data']}
-          console.log('this is click para')
           console.log(params)
           console.log(currentHoverIndex)
           const { seriesIndex, event } = params
