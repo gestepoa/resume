@@ -445,8 +445,56 @@
         let seriesItem = {name: String(nameList[i]), type: 'line', triggerLineEvent: true, data: seriesItemData}
         seriesList.push(seriesItem)
       }
+      let markLine = setMarkLine()
+      let markArea = setMarkArea()
+      seriesList.push(markLine)
+      seriesList.push(markArea)
       console.log(seriesList)
       return seriesList
+    }
+
+    function setMarkArea() {
+      return {
+        id: 'XXXXXX',
+        type: 'line',
+        data: [],
+        markArea: {
+          silent: true,
+          itemStyle: {
+            opacity: 0.1
+          },
+          data: [
+            [{yAxis: '黑龙江', itemStyle: {color: '#FFA500'}}, {yAxis: '青海'}],
+            [{yAxis: '青海', itemStyle: {color: '#7FFFD4'}}, {yAxis: '新疆'}],
+            [{yAxis: '新疆', itemStyle: {color: '#00FFFF'}}, {yAxis: '北京'}],
+            [{yAxis: '北京', itemStyle: {color: '#FF0000'}}, {yAxis: '香港'}]
+          ]
+        }
+      }
+    }
+
+    function setMarkLine() {
+      return {
+        type: 'line',
+        data: [],
+        markLine: {
+          silent: true,
+          symbol:'none',
+          label: {
+            show: true,
+            formatter: '{b}'
+          },
+          lineStyle: {
+            color: '#333',
+            opacity: 0.5
+          },
+          data: [
+            {name: 'President JIANG', xAxis: 1989},
+            {name: 'President HU', xAxis: 2002},
+            {name: 'President XI', xAxis: 2012}
+          ]
+        }
+      }
     }
 
     // function of create an echarts line chart 
