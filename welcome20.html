@@ -425,7 +425,7 @@
     }
 
     function getLineChartSeriesData() {
-      console.log(primitivesManagement)
+      // console.log(primitivesManagement)
       let seriesList = []
       let nameList = primitivesManagement.getKeys()
       for(let i = 0; i<=nameList.length-1; i++) {
@@ -449,7 +449,7 @@
       let markArea = setMarkArea()
       seriesList.push(markLine)
       seriesList.push(markArea)
-      console.log(seriesList)
+      // console.log(seriesList)
       return seriesList
     }
 
@@ -501,9 +501,6 @@
     function drawLineChart() {
       let myChart = echarts.init(document.getElementById('stackedLine'))
       let option = {
-        title: {
-          text: 'Stacked Line'
-        },
         tooltip: {
           trigger: 'axis',
           axisPointer: {
@@ -511,8 +508,8 @@
           },
           triggerOn: 'none',
           formatter: function(params) {
-            console.log(params)
-            console.log(currentHoverIndex)
+            // console.log(params)
+            // console.log(currentHoverIndex)
             let personalTip = ''
             for (let i = 0; i <= params.length - 1; i++){
               if (params[i]['data'][0] === currentHoverIndex['data'][0]) {
@@ -559,7 +556,7 @@
           boundaryGap: false,
           axisLabel: {
             textStyle: {
-              color: function (value) {
+              color: function (value, index) {
                 if ( value === '自治区' || value === '直辖市' || value === '特别行政区' ) {
                   return '#FF0000'
                 } else {
@@ -579,8 +576,8 @@
       myChart.on('mouseover', function(params) {
         if (params['data'] !== undefined) {
           currentHoverIndex = {line: params['seriesIndex'], data: params['data']}
-          console.log(params)
-          console.log(currentHoverIndex)
+          // console.log(params)
+          // console.log(currentHoverIndex)
           const { seriesIndex, event } = params
           myChart.dispatchAction({
             type: 'showTip',
