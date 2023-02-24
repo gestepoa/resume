@@ -361,13 +361,13 @@
       let myChart = echarts.init(document.getElementById('Nightingale1'))
       let option = {
         title: {
-          text: 'Duration Years ',
-          subtext: 'Data Upgrading',
+          text: '时间分布',
+          subtext: '地点：时间',
           left: 'center'
         },
         tooltip: {
           trigger: 'item',
-          formatter: '{a} <br/>{b} : {c} ({d}%)'
+          formatter: '{a} <br/>{b} : {c}年 ({d}%)'
         },
         toolbox: {
           show: true,
@@ -379,7 +379,7 @@
           }
         },
         series: [{
-          name: 'Radius Mode',
+          name: target,
           type: 'pie',
           radius: [20, 140],
           center: ['50%', '50%'],
