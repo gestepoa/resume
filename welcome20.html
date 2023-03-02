@@ -208,12 +208,14 @@
     options.enableZoomControls = true;
     options.enableDistanceLegend = true;
     options.enableCompassOuterRing = true;
-
     options.resetTooltip = "重置视图";
     options.zoomInTooltip = "放大";
     options.zoomOutTooltip = "缩小";
-
     new CesiumNavigation(viewer, options);
+    
+    const navigationMode = document.getElementsByClassName('navigation-control-icon-zoom-in')[0]
+    // console.log(navigationMode)
+    navigationMode.style.color = '#E60E0E'
 
     // ----------------------------------------------------------------------dictionary-------------------------------------------------------------------------------
     // define class
