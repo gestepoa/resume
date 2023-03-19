@@ -73,7 +73,7 @@
       <img src="./icon/iconchart4.png" onclick="drawLineChartPre()"></img>
     </div>
     <div class="borderbtn">
-      <img src="./icon/iconborder.png" onclick="getLineChartSeriesData()"></img>
+      <img src="./icon/iconborder.png" onclick="provinceBorder()"></img>
     </div>
   </div>
   <script>
@@ -686,6 +686,7 @@
     async function provinceBorder() {
       if (this.viewer.dataSources.getByName("PBCHN")[0]) {
         alert("province border exist")
+        viewer.dataSources.remove(viewer.dataSources.getByName("PBCHN")[0])
       } else {
         let condition = await createBorder().then((result) => {
           result.name = "PBCHN";
