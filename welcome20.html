@@ -75,10 +75,6 @@
     <div class="borderbtn">
       <img src="./icon/iconborder.png" onclick="provinceBorder()"></img>
     </div>
-    <div class="msgbox">
-      <input type="file" id="inputBox">
-      <img class="msgboxclose" src="./icon/iconoff.png" onclick="msgboxclose()"></img>
-    </div>
   </div>
   <script>
 
@@ -692,22 +688,12 @@
         alert("province border exist")
         viewer.dataSources.remove(viewer.dataSources.getByName("PBCHN")[0])
       } else {
-        let msgbox = document.querySelector('.msgbox')
-        msgbox.style.display = 'block'
-        msgbox.addEventListener("change", function() {
-          let reader = new FileReader()
-          console.log(inputBox.files[0].name)
-          // reader.readAsText(inputBox.files[0])
-          // reader.onload = function() {
-          //   console.log(this.result)
-          // }
+        let condition = await createBorder().then((result) => {
+          result.name = "PBCHN";
+          viewer.dataSources.add(result)
+          return "resource loaded"
         })
-        // let condition = await createBorder().then((result) => {
-        //   result.name = "PBCHN";
-        //   viewer.dataSources.add(result)
-        //   return "resource loaded"
-        // })
-        // alert(condition)
+        alert(condition)
       }
     }
 

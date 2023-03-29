@@ -389,30 +389,3 @@ li {
   height: 16px;
   cursor: pointer;
 }
-
-/* message box */
-.msgbox {
-  position: absolute;
-  z-index: 1; 
-  top: 200px;
-  left: 400px;
-  width: 200px;
-  height: 100px;
-  display: flex;
-  border: 1px solid #666;
-  background-color: aqua;
-  display: none;
-}
-.msgboxclose {
-  position: absolute;
-  top: 2px;
-  right: 5px;
-  width: 20px;
-  height: 16px;
-  cursor: pointer;
-}
-#inputBox {
-  position: absolute;
-  top: 20px;
-  left: 5px;
-}
