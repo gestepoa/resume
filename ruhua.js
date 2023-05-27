@@ -323,6 +323,20 @@ var totalresume =
         ]
     },
     {
+        "target": "李强",
+        "province": "北京",
+        "local": "北京",
+        "govpos": "中共中央政治局常委；国务院总理",
+        "domains": "党政",
+        "time": 2022,
+        "duration": 1,
+        "position": [
+            116.407526,
+            39.90403,
+            0
+        ]
+    },
+    {
         "target": "陈敏尔",
         "province": "浙江",
         "local": "绍兴",
@@ -393,6 +407,20 @@ var totalresume =
         ]
     },
     {
+        "target": "陈敏尔",
+        "province": "天津",
+        "local": "天津",
+        "govpos": "天津市委书记",
+        "domains": "党",
+        "time": 2022,
+        "duration": 1,
+        "position": [
+            117.200983,
+            39.084158,
+            0
+        ]
+    },
+    {
         "target": "丁薛祥",
         "province": "上海",
         "local": "上海",
@@ -410,10 +438,10 @@ var totalresume =
         "target": "丁薛祥",
         "province": "北京",
         "local": "北京",
-        "govpos": "中共中央办公厅副主任/主任/国家主席办公室主任/中央书记处书记",
+        "govpos": "中共中央办公厅副主任/主任/中央书记处书记/中共中央政治局常委；国家主席办公室主任/国务院副总理",
         "domains": "党政",
         "time": 2013,
-        "duration": 9,
+        "duration": 10,
         "position": [
             116.407526,
             39.90403,
@@ -536,10 +564,10 @@ var totalresume =
         "target": "胡春华",
         "province": "北京",
         "local": "北京",
-        "govpos": "中央政治局委员/国务院副总理",
+        "govpos": "中央政治局委员；国务院副总理/全国政协副委员长",
         "domains": "党政",
         "time": 2017,
-        "duration": 5,
+        "duration": 6,
         "position": [
             116.407526,
             39.90403,
@@ -620,10 +648,10 @@ var totalresume =
         "target": "蔡奇",
         "province": "北京",
         "local": "北京",
-        "govpos": "中央国家安全委员会副主任、北京市委副书记、市长、市委书记",
+        "govpos": "北京市委副书记/书记/中共中央政治局常委/中央书记处书记/中央办公厅主任；中央国家安全委员会副主任/北京市市长",
         "domains": "党政",
         "time": 2014,
-        "duration": 8,
+        "duration": 9,
         "position": [
             116.407526,
             39.90403,
@@ -725,6 +753,20 @@ var totalresume =
         "position": [
             113.264434,
             23.129162,
+            0
+        ]
+    },
+    {
+        "target": "李希",
+        "province": "北京",
+        "local": "北京",
+        "govpos": "中共中央政治局常委/中纪委书记",
+        "domains": "党",
+        "time": 2022,
+        "duration": 1,
+        "position": [
+            116.407526,
+            39.90403,
             0
         ]
     },
@@ -861,7 +903,7 @@ var totalresume =
         "govpos": "河南省委书记，河南省人大常委会主任",
         "domains": "党政",
         "time": 2021,
-        "duration": 1,
+        "duration": 2,
         "position": [
             113.625368,
             34.746599,
@@ -900,10 +942,10 @@ var totalresume =
         "target": "赵乐际",
         "province": "北京",
         "local": "北京",
-        "govpos": "中组部部长、中央书记处书记、中纪委书记",
-        "domains": "党",
+        "govpos": "中组部部长/中央书记处书记/中纪委书记；全国人大常委会委员长",
+        "domains": "党政",
         "time": 2012,
-        "duration": 10,
+        "duration": 11,
         "position": [
             116.407526,
             39.90403,
@@ -915,7 +957,7 @@ var totalresume =
         "province": "上海",
         "local": "上海",
         "govpos": "复旦大学",
-        "domains": "学",
+        "domains": "党",
         "time": 1981,
         "duration": 14,
         "position": [
@@ -928,113 +970,15 @@ var totalresume =
         "target": "王沪宁",
         "province": "北京",
         "local": "北京",
-        "govpos": "中央政策研究室组长、副主任、主任，中央书记处书记、中央全面深化改革领导小组办公室主任、中央全面深化改革委员会副主任、中央文明委主任",
+        "govpos": "中央政策研究室组长/副主任/主任，中央书记处书记、中央全面深化改革领导小组办公室主任，中央全面深化改革委员会副主任、中央文明委主任；全国政协主席",
         "domains": "党",
         "time": 1995,
-        "duration": 27,
+        "duration": 28,
         "position": [
             116.407526,
             39.90403,
             0
         ]
-    },
-    {
-        "target": "习近平",
-        "province": "河北",
-        "local": "正定",
-        "govpos": "县委（副）书记",
-        "domains": "党",
-        "position": [
-            114.56748962402344,
-            38.155077102180655,
-            0
-        ],
-        "time": 1982,
-        "duration": 4
-    },
-    {
-        "target": "习近平",
-        "province": "福建",
-        "local": "厦门",
-        "govpos": "副市长",
-        "domains": "政",
-        "position": [
-            118.09204101562501,
-            24.51713945052515,
-            0
-        ],
-        "time": 1985,
-        "duration": 3
-    },
-    {
-        "target": "习近平",
-        "province": "福建",
-        "local": "宁德",
-        "govpos": "地委书记",
-        "domains": "党",
-        "position": [
-            119.50241088867188, 
-            26.805686491796603,
-            0
-        ],
-        "time": 1988,
-        "duration": 2
-    },
-    {
-        "target": "习近平",
-        "province": "福建",
-        "local": "福州",
-        "govpos": "市委书记、市人大常委会主任、省委副书记、代省长、省委书记",
-        "domains": "党政军",
-        "position": [
-            119.2950439453125, 
-            26.054315442680412,
-            0
-        ],
-        "time": 1990,
-        "duration": 12
-    },
-    {
-        "target": "习近平",
-        "province": "浙江",
-        "local": "杭州",
-        "govpos": "省人大常委会主任、代省长、省委副书记、省委书记",
-        "domains": "党政",
-        "position": [
-            120.1739501953125,
-            30.282788098216884,
-            0
-        ],
-        "time": 2002,
-        "duration": 5
-    },
-    {
-        "target": "习近平",
-        "province": "上海",
-        "local": "上海",
-        "govpos": "市委书记",
-        "domains": "党",
-        "position": [
-            121.46484375, 
-            31.353636941500987,
-            0
-        ],
-        "time": 2007,
-        "duration": 1
-    },
-    {
-        "target": "习近平",
-        "province": "北京",
-        "local": "北京",
-        "govpos": "政治局常委、国家副主席、主席、总书记、中央军委主席",
-        "domains": "党政军",
-        "position": [
-            116.43310546875,
-            39.977120098439634,
-            0
-        ],
-        "time": 200712,
-        "duration": 15
     },
     {
         "target": "陈文清",
@@ -1085,7 +1029,7 @@ var totalresume =
         "govpos": "中纪委副书记、中共中央书记处书记、政法委书记，国家安全部部长",
         "domains": "党政",
         "time": 2012,
-        "duration": 10,
+        "duration": 11,
         "position": [
             116.407526,
             39.90403,
@@ -1138,7 +1082,7 @@ var totalresume =
         "target": "陈希",
         "province": "北京",
         "local": "北京",
-        "govpos": "中组部副部长、部长、中共中央书记处书记、中共中央党校校长、国家行政学院院长",
+        "govpos": "中组部副部长/部长、中共中央书记处书记、中共中央党校校长、国家行政学院院长",
         "domains": "党",
         "time": 2013,
         "duration": 10,
@@ -1239,7 +1183,231 @@ var totalresume =
         "govpos": "中央政法委委员、秘书长，中央全面依法治国委员会委员、办公室副主任，国家安全部部长、党委书记",
         "domains": "党政",
         "time": 2018,
-        "duration": 4,
+        "duration": 5,
+        "position": [
+            116.407526,
+            39.90403,
+            0
+        ]
+    },
+    {
+        "target": "马兴瑞",
+        "province": "黑龙江",
+        "local": "哈尔滨",
+        "govpos": "哈工大系主任/副院长/副校长",
+        "domains": "学",
+        "time": 1993,
+        "duration": 3,
+        "position": [
+            126.534967,
+            45.803775,
+            0
+        ]
+    },
+    {
+        "target": "马兴瑞",
+        "province": "北京",
+        "local": "北京",
+        "govpos": "中国空间技术研究院副院长，航天科工副总经理/经理；工信部副部长，国家航天局局长，国家原子能机构主任，国家国防科技工业局局长",
+        "domains": "学军政",
+        "time": 1996,
+        "duration": 17,
+        "position": [
+            116.407526,
+            39.90403,
+            0
+        ]
+    },
+    {
+        "target": "马兴瑞",
+        "province": "广东",
+        "local": "广州",
+        "govpos": "广东省委副书记、政法委书记，省社工委主任",
+        "domains": "党",
+        "time": 2013,
+        "duration": 2,
+        "position": [
+            113.264434,
+            23.129162,
+            0
+        ]
+    },
+    {
+        "target": "马兴瑞",
+        "province": "广东",
+        "local": "深圳",
+        "govpos": "广东省委副书记、政法委书记，深圳市委书记",
+        "domains": "党",
+        "time": 2015,
+        "duration": 1,
+        "position": [
+            114.057868,
+            22.543099,
+            0
+        ]
+    },
+    {
+        "target": "马兴瑞",
+        "province": "广东",
+        "local": "广州",
+        "govpos": "广东省委副书记；省政府副省长/省长，党组书记，中央港澳工作协调小组成员",
+        "domains": "党政",
+        "time": 2016,
+        "duration": 5,
+        "position": [
+            113.264434,
+            23.129162,
+            0
+        ]
+    },
+    {
+        "target": "马兴瑞",
+        "province": "新疆",
+        "local": "乌鲁木齐",
+        "govpos": "新疆维吾尔自治区党委委员、常委、书记；新疆生产建设兵团第一政委",
+        "domains": "党军",
+        "time": 2021,
+        "duration": 2,
+        "position": [
+            87.616848,
+            43.825592,
+            0
+        ]
+    },
+    {
+        "target": "袁家军",
+        "province": "北京",
+        "local": "北京",
+        "govpos": "航空航天工业部五院副主任/副院长/院长/党委副书记",
+        "domains": "学军",
+        "time": 1992,
+        "duration": 20,
+        "position": [
+            116.407526,
+            39.90403,
+            0
+        ]
+    },
+    {
+        "target": "袁家军",
+        "province": "宁夏",
+        "local": "银川",
+        "govpos": "宁夏回族自治区党委常委；自治区政府常务副主席",
+        "domains": "党政",
+        "time": 2012,
+        "duration": 2,
+        "position": [
+            106.230909,
+            38.487193,
+            0
+        ]
+    },
+    {
+        "target": "袁家军",
+        "province": "浙江",
+        "local": "杭州",
+        "govpos": "浙江省委常委/副书记/书记/政法委书记/纪委书记；副省长/省长/省人大常委会主任",
+        "domains": "党政",
+        "time": 2014,
+        "duration": 8,
+        "position": [
+            120.209947,
+            30.245853,
+            0
+        ]
+    },
+    {
+        "target": "袁家军",
+        "province": "重庆",
+        "local": "重庆",
+        "govpos": "重庆市委书记",
+        "domains": "党",
+        "time": 2022,
+        "duration": 1,
+        "position": [
+            106.551556,
+            29.563009,
+            0
+        ]
+    },
+    {
+        "target": "陈吉宁",
+        "province": "北京",
+        "local": "北京",
+        "govpos": "清华大学系副主任/主任/副校长/校长；国务院环境部部长，北京市副市长/代市长/市长；北京市委副书记",
+        "domains": "党政学",
+        "time": 1998,
+        "duration": 24,
+        "position": [
+            116.407526,
+            39.90403,
+            0
+        ]
+    },
+    {
+        "target": "陈吉宁",
+        "province": "上海",
+        "local": "上海",
+        "govpos": "上海市委书记",
+        "domains": "党",
+        "time": 2022,
+        "duration": 1,
+        "position": [
+            121.473701,
+            31.230416,
+            0
+        ]
+    },
+    {
+        "target": "尹力",
+        "province": "北京",
+        "local": "北京",
+        "govpos": "国务院司干部/司副处长/司处长，卫生部办公厅副主任/主任/司长，卫生部部长，食品药品监督管理局局长",
+        "domains": "政",
+        "time": 1993,
+        "duration": 22,
+        "position": [
+            116.407526,
+            39.90403,
+            0
+        ]
+    },
+    {
+        "target": "尹力",
+        "province": "四川",
+        "local": "成都",
+        "govpos": "四川省委副书记，宣传部部长；省长",
+        "domains": "党政",
+        "time": 2015,
+        "duration": 5,
+        "position": [
+            104.066541,
+            30.572269,
+            0
+        ]
+    },
+    {
+        "target": "尹力",
+        "province": "福建",
+        "local": "福州",
+        "govpos": "福建省委书记；省人大常委会主任",
+        "domains": "党政",
+        "time": 2020,
+        "duration": 2,
+        "position": [
+            119.296494,
+            26.074507,
+            0
+        ]
+    },
+    {
+        "target": "尹力",
+        "province": "北京",
+        "local": "北京",
+        "govpos": "北京市委书记",
+        "domains": "党",
+        "time": 2022,
+        "duration": 1,
         "position": [
             116.407526,
             39.90403,
