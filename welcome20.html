@@ -399,7 +399,7 @@
     function drawLineChartPre() {
       console.log('start drawing line chart')
       let con= ''
-      con += `<div class="lineChartOut">
+      con += `<div class="lineChartOut" id="lineChartOutId">
                 <div class="lineChartIn" id="stackedLine"></div>
                 <img class="closeLineChartDiv" src="./icon/iconoff.png" onclick="closediv('.lineChart')"></img>
               </div>
@@ -418,6 +418,7 @@
       div.innerHTML = con
       cesiumContainer.append(div)
       drawLineChart()
+      dragElement(document.getElementById("lineChartOutId"));
     }
 
     // close(delete) a div by searching its class name
@@ -853,10 +854,9 @@
     // function of right-click option menu "chart", sub-function of rightliClick()
     function showPersonChart(target) {
       let con = ''
-      con += `<div class="personChartPaperWall"></div>
-              <div class="personChartOut">
+      con += `
+              <div class="personChartOut" id="personChartOutId">
                 <div class="personChartIn" id="Nightingale1"></div>
-                <img class="movediv" src="./icon/iconmove.png"></img>
                 <img class="closediv" src="./icon/iconoff.png" onclick="closediv('.personChart')"></img>
               </div>
               `
@@ -873,6 +873,7 @@
       div.innerHTML = con
       cesiumContainer.append(div)
       drawChart(target)
+      dragElement(document.getElementById("personChartOutId"));
     }
 
     // left click define
@@ -910,6 +911,37 @@
           previousPickedEntity = pickedEntity;
         }
       }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+    }
+
+    // drag div 
+    function dragElement(element) {
+        let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+        element.onmousedown = dragMouseDown;
+
+        function dragMouseDown(e) {
+            e = e || window.event;
+            e.preventDefault();
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            document.onmouseup = closeDragElement;
+            document.onmousemove = elementDrag;
+        }
+
+        function elementDrag(e) {
+            e = e || window.event;
+            e.preventDefault();
+            pos1 = pos3 - e.clientX;
+            pos2 = pos4 - e.clientY;
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            element.style.top = (element.offsetTop - pos2) + "px";
+            element.style.left = (element.offsetLeft - pos1) + "px";
+        }
+
+        function closeDragElement() {
+            document.onmouseup = null;
+            document.onmousemove = null;
+        }
     }
 
     // --------------------------------------------------------------------------geographic information-------------------------------------------------------------------

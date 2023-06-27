@@ -323,8 +323,8 @@ li {
 }
 
 /* personal echarts */
-.personChartPaperWall {
-  /* background: #666; */
+/* .personChartPaperWall {
+  background: #666;
   position: relative;
   width: 20px;
   height: 20px;
@@ -336,12 +336,12 @@ li {
 
 .personChartPaperWall::-webkit-resizer {
   background-color: transparent;
-}
+} */
 
 .personChartOut {
   position: absolute;
-  bottom: -440px;
-  right: -440px;
+  top: 8px;
+  left: 100px;
   width: 460px;
   height: 460px;
   background: #fafafa;
@@ -364,13 +364,13 @@ li {
   cursor: pointer;
 }
 
-.movediv {
+/* .movediv {
   position: absolute;
   top: 6px;
   left: 6px;
   width: 20px;
   height: 20px;
-}
+} */
 
 /* test chart area*/
 /* 2023/1/17 echart with Stacked Line */
