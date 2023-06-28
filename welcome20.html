@@ -21,7 +21,7 @@
   <div id="cesiumContainer">
     <dl class="checkBox">
       <div class="show">
-        <img class="showexpand" src="./icon/iconexpand.png" onclick="showdl()"></img>
+        <img class="showexpand" src="./icon/iconexpand.png"></img>
       </div>
       <div class="dtcondition">
         <img class="dtclose" src="./icon/iconclose.png"></img>
@@ -601,30 +601,6 @@
 
     // ---------------------------------------------------------------------------interaction-------------------------------------------------------------------------
 
-    window.onload = function () {
-      let oA = document.querySelector('.dtclose')
-      oA.onclick = function () {
-        let show_show = document.querySelector('.show')
-        let show_dtcondition = document.querySelector('.dtcondition')
-        let show_ddcondition = document.querySelector('.ddcondition')
-        let show_legend = document.querySelector('.legend')
-        show_show.style.display = 'block'
-        show_dtcondition.style.display = 'none'
-        show_ddcondition.style.display = 'none'
-        show_legend.style.display = 'none'
-      }
-    }
-    // hide ddcondition
-    function showdl() {
-      let show_show = document.querySelector('.show')
-      let show_dtcondition = this.document.querySelector('.dtcondition')
-      let show_ddcondition = this.document.querySelector('.ddcondition')
-      let show_legend = document.querySelector('.legend')
-      show_show.style.display = 'none'
-      show_dtcondition.style.display = 'block'
-      show_ddcondition.style.display = 'block'
-      show_legend.style.display = 'block'
-    }
     // sub-function of inputSearch()
     function checkList(name) {
       let obj = document.getElementsByName('item')
