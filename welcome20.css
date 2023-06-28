@@ -37,6 +37,20 @@ p {
   z-index: 1
 }
 
+.checkBox:hover .show{
+  display: none;
+}
+.checkBox:hover .dtcondition{
+  display: block;
+}
+.checkBox:hover .ddcondition{
+  display: block;
+}
+.checkBox:hover .legend{
+  display: block;
+}
+
+
 .show {
   width: 220px;
   height: 20px;
