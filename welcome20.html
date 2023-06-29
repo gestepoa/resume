@@ -607,7 +607,6 @@
       for (let i = 0; i <= obj.length - 1; i++) {
         if (obj[i].value == name) {
           if (obj[i].checked) {
-            return "target exist"
             break
           } else {
             obj[i].checked = true
@@ -617,12 +616,20 @@
           }
         }
       }
+      return 'not in the list'
     }
     // search box function 
     function inputSearch() {
       let result = document.querySelector(".tbox")
       let text = result.value
-      let checkListResult = checkList(text)
+      let checkListResult = ''
+
+      if (primitivesManagement.find(text)) {
+        checkListResult = 'target exist'
+      } else {
+        checkListResult = checkList(text)
+      }
+
       if (checkListResult == 'target exist') {
         alert('target exist')
       } else {
