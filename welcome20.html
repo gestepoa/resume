@@ -225,6 +225,16 @@
       }
       add(key, value) {
         this.dataStore[key] = value
+        // let keys = this.getKeys()
+        // if (keys.indexOf(key) === -1) {
+        //   let values = []
+        //   values.push(value)
+        //   this.dataStore[key] = values
+        // } else {
+        //   let tempValues = this.find(key)
+        //   tempValues.push(value)
+        //   this.dataStore[key] = tempValues
+        // }
       }
       update(key, value) {
         this.remove(key)
@@ -1217,10 +1227,11 @@
         alert("waiting")
         return 0
       } else {
-        for (let i = 0; i <= totalresume.length - 1; i++) {
-          if (totalresume[i].target == target) {
-            let entityPoint = viewer.entities.getById(target + String(totalresume[i].time))
-            let entityLine = viewer.entities.getById(target + String(totalresume[i].time) + "L")
+        let personResume = totalresume.filter(item => item.target === target)
+        for (let i = 0; i <= personResume.length - 1; i++) {
+          if (personResume[i].target == target) {
+            let entityPoint = viewer.entities.getById(target + String(personResume[i].time))
+            let entityLine = viewer.entities.getById(target + String(personResume[i].time) + "L")
             let polylines = primitivesManagement.find(target)
             primitivesManagement.remove(target)
             viewer.scene.primitives.remove(polylines)
