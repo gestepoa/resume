@@ -225,16 +225,6 @@
       }
       add(key, value) {
         this.dataStore[key] = value
-        // let keys = this.getKeys()
-        // if (keys.indexOf(key) === -1) {
-        //   let values = []
-        //   values.push(value)
-        //   this.dataStore[key] = values
-        // } else {
-        //   let tempValues = this.find(key)
-        //   tempValues.push(value)
-        //   this.dataStore[key] = tempValues
-        // }
       }
       update(key, value) {
         this.remove(key)
@@ -282,28 +272,12 @@
 
     // store img name
     var dict1 = new Dictionary();
-    dict1.add("党", "party");
-    dict1.add("政", "gov");
-    dict1.add("军", "mil");
-    dict1.add("团", "youth");
-    dict1.add("学", "university");
-    dict1.add("党政", "party_gov");
-    dict1.add("党军", "party_mil");
-    dict1.add("党团", "party_youth");
-    dict1.add("政团", "gov_youth");
-    dict1.add("政军", "gov_mil");
-    dict1.add("党学", "party_university");
-    dict1.add("政学", "gov_university");
-    dict1.add("军学", "mil_university");
-    dict1.add("党政军", "party_gov_mil");
-    dict1.add("党军团", "party_mil_youth");
-    dict1.add("政军团", "gov_mil_youth");
-    dict1.add("党政团", "party_gov_youth");
-    dict1.add("党政学", "party_gov_university");
-    dict1.add("党军学", "party_mil_university");
-    dict1.add("政军学", "gov_mil_university");
-    dict1.add("党政军团", "party_gov_mil_youth");
-    dict1.add("党政军学", "party_gov_mil_university");
+    dict1.add("党", "party");dict1.add("政", "gov");dict1.add("军", "mil");dict1.add("团", "youth");dict1.add("学", "university");
+    dict1.add("党政", "party_gov");dict1.add("党军", "party_mil");dict1.add("党团", "party_youth");dict1.add("政团", "gov_youth");
+    dict1.add("政军", "gov_mil");dict1.add("党学", "party_university");dict1.add("政学", "gov_university");dict1.add("军学", "mil_university");
+    dict1.add("党政军", "party_gov_mil");dict1.add("党军团", "party_mil_youth");dict1.add("政军团", "gov_mil_youth");
+    dict1.add("党政团", "party_gov_youth");dict1.add("党政学", "party_gov_university");dict1.add("党军学", "party_mil_university");
+    dict1.add("政军学", "gov_mil_university");dict1.add("党政军团", "party_gov_mil_youth");dict1.add("党政军学", "party_gov_mil_university");
 
     // ---------------------------------------------------------------------------chart------------------------------------------------------------------------
     // key-value mode object with distinct keys
@@ -1010,7 +984,7 @@
         width: 10,
         material: Cesium.Material.fromType(Cesium.Material.FadeType, {
           repeat: false,
-          fadeInColor: Cesium.Color.fromCssColorString(ox).withAlpha(0.2),
+          fadeInColor: Cesium.Color.fromCssColorString("#FFFFFF").withAlpha(0.2),
           fadeOutColor: Cesium.Color.fromCssColorString(ox),
           // maximumDistance: 0.5,
           time: new Cesium.Cartesian2(0.0, 0.0),
@@ -1229,15 +1203,13 @@
       } else {
         let personResume = totalresume.filter(item => item.target === target)
         for (let i = 0; i <= personResume.length - 1; i++) {
-          if (personResume[i].target == target) {
-            let entityPoint = viewer.entities.getById(target + String(personResume[i].time))
-            let entityLine = viewer.entities.getById(target + String(personResume[i].time) + "L")
-            let polylines = primitivesManagement.find(target)
-            primitivesManagement.remove(target)
-            viewer.scene.primitives.remove(polylines)
-            viewer.entities.remove(entityPoint)
-            viewer.entities.remove(entityLine)
-          }
+          let entityPoint = viewer.entities.getById(target + String(personResume[i].time))
+          let entityLine = viewer.entities.getById(target + String(personResume[i].time) + "L")
+          let polylines = primitivesManagement.find(target)
+          primitivesManagement.remove(target)
+          viewer.scene.primitives.remove(polylines)
+          viewer.entities.remove(entityPoint)
+          viewer.entities.remove(entityLine)
         }
         let entitytest = viewer.entities.getById(target);
         viewer.entities.remove(entitytest)
